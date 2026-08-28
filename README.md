@@ -9,7 +9,7 @@ Button | Action
 :-: | :-
 WASD  | Move
 E     | Interact
--     | -
+&nbsp;|
 F2    | Toggle FPS display.
 F3    | Toggle quick-debug display.
 F4    | Toggle profiling (full debug).

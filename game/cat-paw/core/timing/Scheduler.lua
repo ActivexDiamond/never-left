@@ -249,6 +249,7 @@ end
 function Scheduler:drawEveryFor(interval, timeout, func, args, wrapUp, wrapUpArgs)
 	self:schedule(nil, interval, timeout, nil, func, args, wrapUp, wrapUpArgs, true)
 end
+
 ------------------------------ Cancel Methods ------------------------------
 function Scheduler:cancel(func)
 	local i = type(func) == 'number' and func or findIndex(self.tasks.func, func)
