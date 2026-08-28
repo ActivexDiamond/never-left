@@ -1,0 +1,61 @@
+local middleclass = require "libs.middleclass"
+local ItemManager = require "core.ItemManager"
+
+local Scene = require "cat-paw-mods.Scene"
+local EvKeyPress = require "cat-paw.core.patterns.event.keyboard.EvKeyPress"
+
+local Map = require "core.Map"
+local Player = require "core.Player"
+
+--============================ Helper Methods ==============================
+
+--============================ Constructor ==============================
+---@class InGameScene : Scene
+---@overload fun(): self
+local InGameScene = middleclass("InGameScene", Scene)
+	
+function InGameScene:initialize()
+	Scene.initialize(self)
+	self.map = Map(self)
+	self:addObject(self.map)
+
+	
+	self.player = Player(self, self.map:getCenterPoint())
+	self:addObject(self.player)
+--	self:addObject(ItemManager(self))
+end
+
+--============================ Constants ==============================
+
+--============================ Core API ==============================
+
+function InGameScene:update(dt)
+	Scene.update(self, dt)
+	print(self.player.pos, self.map.pos)
+end
+
+function InGameScene:draw(g2d)
+--	Scene.draw(self, g2d)
+	self.player:draw(g2d)
+	self.map:draw(g2d)
+	self.player:lateDraw(g2d)
+end
+
+--============================ API ==============================
+
+--============================ Callbacks ==============================
+InGameScene[EvKeyPress] = function(self, e)
+	if e.key == 'space' then
+	end
+end
+
+function InGameScene:enter()
+	Scene.enter(self)
+		GAME:setBackgroundColor({0, 0, 0})
+end
+
+--============================ Internals ==============================
+
+--============================ Getters / Setters ==============================
+
+return InGameScene
