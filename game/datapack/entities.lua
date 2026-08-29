@@ -1,10 +1,10 @@
 data{"player",
-	w = 16,
-	h = 16,
+	w = 8,
+	h = 8,
 	
 	SPEED = 50,
 	lightRadius = 15,
-	lightFps = 5,
+	lightFps = 3,
 }
 
 data{"candle",
@@ -14,8 +14,8 @@ data{"candle",
 	lightRadius = 5,
 }
 
-data{"light_sprite",
-	w = 32,
-	h = 32,
+data{"player_light",
+	w = 80,
+	h = 80,
 }
 

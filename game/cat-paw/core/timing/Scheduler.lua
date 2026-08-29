@@ -227,6 +227,7 @@ end
 
 function Scheduler:callEvery(interval, func, args, wrapUp, wrapUpArgs)
 	self:schedule(nil, interval, nil, nil, func, args, wrapUp, wrapUpArgs)
+	return func
 end
 
 function Scheduler:callEveryFor(interval, timeout, func, args, wrapUp, wrapUpArgs)

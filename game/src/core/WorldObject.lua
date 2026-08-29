@@ -49,7 +49,6 @@ function WorldObject:draw(g2d)
 		g2d.setColor(1, 1, 1, 1)
 	end
 
-	g2d.setColor(1, 1, 1, 1)
 	local spr, sx, sy
 	if self.useInvSpr then
 		spr, sx, sy = AssetRegistry:getSprInv(self)
@@ -69,11 +68,11 @@ function WorldObject:draw(g2d)
 	local y = self.pos.y + self.h * self.spriteOffset.y
 	local ox = frame:getWidth() * self.spriteOffset.x 
 	local oy = frame:getHeight() * self.spriteOffset.y
-	print(self.ID, self.pos.x, x)
 	if self.flash > 0 then
 		g2d.setColor(1, 0, 0, 1)
 		self.flash = self.flash - 1
 	end
+	
 	g2d.draw(frame, x, y, self.rotation, sx, sy, ox, oy)
 	g2d.setColor(1, 1, 1, 1)
 	--]]
@@ -81,7 +80,7 @@ end
 
 --============================ Graphics ==============================
 function WorldObject:_nextFrame()
-	local spr, sx, sy
+		local spr, sx, sy
 	if self.useInvSpr then
 		spr, sx, sy = AssetRegistry:getSprInv(self)
 	else
@@ -90,7 +89,7 @@ function WorldObject:_nextFrame()
 
 	if spr[0] and spr[0].typeOf and spr[0]:typeOf("Drawable") then
 		self.currentFrame = self.currentFrame + 1
-		if self.currentFrame >= #spr - 1 then
+		if self.currentFrame >= #spr then
 			self.currentFrame = 0
 		end
 	else

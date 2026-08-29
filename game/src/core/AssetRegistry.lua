@@ -85,7 +85,7 @@ function AssetRegistry:_fetchSpr(obj, w, h, objPath, storage)
 		--Is animation
 		local frame = spr[obj.currentFrame]
 		local sprW, sprH = frame:getDimensions()
-		return frame, (w or obj.w)/sprW, (h or obj.h)/sprH
+		return spr, (w or obj.w)/sprW, (h or obj.h)/sprH
 	else
 		--Single image
 		local sprW, sprH = spr:getDimensions()

@@ -42,11 +42,14 @@ function InGameScene:draw(g2d)
 
 		g2d.translate(cameraX, cameraY)
 
-		--	Scene.draw(self, g2d)
+	--	Scene.draw(self, g2d)
 		self.player:earlyDraw(g2d)
 		self.map:draw(g2d)
 		self.player:draw(g2d)
 	g2d.pop()
+		g2d.setColor(1,0,0)
+		g2d.setPointSize(8)
+--		g2d.points(sw/2, sh/2)	
 end
 
 --============================ API ==============================

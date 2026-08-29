@@ -1,0 +1,43 @@
+{
+    "activeFile": "main.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "main.tmx": {
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 183.83333333333334,
+                "y": 146.83333333333331
+            }
+        },
+        "map.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "/home/activexdiamond/Dropbox/code/Love/never-left/game/assets/map",
+    "last.imagePath": "/home/activexdiamond/Dropbox/code/Love/never-left/game/assets/spr/obj",
+    "map.height": 1,
+    "map.lastUsedExportFilter": "Lua files (*.lua)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 260,
+    "map.tileWidth": 400,
+    "map.width": 1,
+    "openFiles": [
+        "main.tmx",
+        "map.tsx"
+    ],
+    "project": "never-left.tiled-project",
+    "recentFiles": [
+        "map.tsx",
+        "main.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 260,
+        "width": 400
+    }
+}
