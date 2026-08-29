@@ -41,10 +41,11 @@ function InGameScene:draw(g2d)
 		local cameraY = -py +((sh - ph) / 2)
 
 		g2d.translate(cameraX, cameraY)
-	--	Scene.draw(self, g2d)
-		self.player:draw(g2d)
+
+		--	Scene.draw(self, g2d)
+		self.player:earlyDraw(g2d)
 		self.map:draw(g2d)
-		self.player:lateDraw(g2d)
+		self.player:draw(g2d)
 	g2d.pop()
 end
 

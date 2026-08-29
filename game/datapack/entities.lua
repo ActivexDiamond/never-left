@@ -1,9 +1,10 @@
 data{"player",
-	w = 32,
-	h = 32,
+	w = 16,
+	h = 16,
 	
 	SPEED = 50,
 	lightRadius = 15,
+	lightFps = 5,
 }
 
 data{"candle",

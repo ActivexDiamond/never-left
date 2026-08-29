@@ -22,7 +22,7 @@ function WorldObject:initialize(id, scene, x, y)
 	self.scene = scene
 	self.pos = brinevector(x, y)
 	
-	self.vel = brinevector(0, 0)
+	self.vel = brinevector(100, 90)
 	self.currentFrame = 0
 	self.rotation = 0
 	self.spriteOffset = {x = 0, y = 0}
@@ -69,8 +69,7 @@ function WorldObject:draw(g2d)
 	local y = self.pos.y + self.h * self.spriteOffset.y
 	local ox = frame:getWidth() * self.spriteOffset.x 
 	local oy = frame:getHeight() * self.spriteOffset.y
-	
-	
+	print(self.ID, self.pos.x, x)
 	if self.flash > 0 then
 		g2d.setColor(1, 0, 0, 1)
 		self.flash = self.flash - 1
@@ -79,6 +78,26 @@ function WorldObject:draw(g2d)
 	g2d.setColor(1, 1, 1, 1)
 	--]]
 end
+
+--============================ Graphics ==============================
+function WorldObject:_nextFrame()
+	local spr, sx, sy
+	if self.useInvSpr then
+		spr, sx, sy = AssetRegistry:getSprInv(self)
+	else
+		spr, sx, sy = AssetRegistry:getSprObj(self)
+	end
+
+	if spr[0] and spr[0].typeOf and spr[0]:typeOf("Drawable") then
+		self.currentFrame = self.currentFrame + 1
+		if self.currentFrame >= #spr - 1 then
+			self.currentFrame = 0
+		end
+	else
+		return false
+	end
+end
+
 
 --============================ API ==============================
 

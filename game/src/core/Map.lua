@@ -28,7 +28,6 @@ function Map:draw(g2d)
 	WorldObject.draw(self, g2d)
 	local spr, sx, sy = AssetRegistry:getSprObj(self)
 	g2d.setColor(1, 1, 1)
-	print(self.pos)
 	g2d.draw(spr, self.pos.x, self.pos.y, 0, self.ZOOM, self.ZOOM)
 end
 
