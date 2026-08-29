@@ -12,9 +12,8 @@ DEBUG = {
 	DRAW_BOUNDING_BOXES = false,
 }
 
-SFX = {
-	
-	["SOUND EFFECTS"] = {
+AUDIO = {
+	SFX = {
 		-- gameover.mp3 by bsp7176 -- https://freesound.org/s/570633/ -- License: Attribution NonCommercial 3.0
 		pickup = love.audio.newSource("assets/sfx/pickup.mp3", "static"),
 		-- open door by sound reality -- https://pixabay.com/sound-effects/household-opening-door-411632/ -- License: Attribution 4.0
@@ -49,8 +48,6 @@ SFX = {
 		horror3 = love.audio.newSource("assets/sfx/horror3.mp3", "static"),
 
 		knocking = love.audio.newSource("assets/sfx/knocking.wav", "static"),
-
-		
 
 		rain = love.audio.newSource("assets/sfx/rain.mp3", "static"),
 

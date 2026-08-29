@@ -52,6 +52,10 @@ function Player:initialize(scene, x, y)
 	self.scene.map.bumpWorld:add(self, self:getBoundingBox())
 
 	self.scratchRotationVector = brinevector(0, 0)
+
+	self._collisionFilterWrapper = function(item, other) 
+		return self:_collisionFilter(item, other)
+	end
 end
 
 --============================ Core API ==============================
@@ -73,8 +77,9 @@ function Player:update(dt)
 		
 		local targetX = self.pos.x + self.vel.x
 		local targetY = self.pos.y + self.vel.y
-		local newX, newY = self.scene.map.bumpWorld:move(self, targetX, targetY)
+		local newX, newY, cols = self.scene.map.bumpWorld:move(self, targetX, targetY, self._collisionFilterWrapper)
 		self.pos.x = newX
+		self:_collisionHandler(cols)
 		self.pos.y = newY
 	end
 
@@ -112,10 +117,45 @@ end
 
 
 --============================ Callbacks ==============================
+
 Player[EvFileChange] = function(self, e)
 	self:_setupLightVars()
 end
+
+--============================ API ==============================
+function Player:pickupItem(item)
+	print("Picked up", item)
+end
+
 --============================ Internals ==============================
+
+function Player:_collisionHandler(cols)
+	for k, v in ipairs(cols or {}) do
+		local other = v.other	
+		if other.layer == "walls" then
+		elseif other.layer == "doors" and not other.opened then
+		elseif other.layer == "pickables" then
+			self:pickupItem(other.ID)
+			self.scene.map.bumpWorld:remove(other)
+			self.scene.map.objs.pickables[other.ID] = nil
+		end
+		print(other.ID)
+	end
+end
+
+
+function Player:_collisionFilter(item, other)
+	if other.layer == "walls" then
+		return 'slide'
+	elseif other.layer == "doors" and not other.opened then
+		return 'slide'
+	elseif other.layer == "pickables" then
+		return 'cross'
+	else
+		return false
+	end
+end
+
 
 function Player:_setupLightVars()
 	self.INITIAL_LIGHT_SIZE = self.light.w
@@ -129,8 +169,7 @@ function Player:_setupLightVars()
 		self.light.w = self.light.w + self.lightGrowAmount * self.lightGrowDir
 		self.light.h = self.light.h + self.lightGrowAmount * self.lightGrowDir
 		local diff = math.abs(self.INITIAL_LIGHT_SIZE - self.light.w)
-		print(diff, self.INITIAL_LIGHT_SIZE, self.light.w)
-		if diff > self.MAX_LIGHT_SIZE then print'x'
+		if diff > self.MAX_LIGHT_SIZE then
 			self.lightGrowDir = self.lightGrowDir * -1
 		end
 	end, {self})

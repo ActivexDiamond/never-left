@@ -4,6 +4,7 @@ local WorldObject = require "core.WorldObject"
 local EvKeyPress = require "cat-paw.core.patterns.event.keyboard.EvKeyPress"
 local bump = require "cat-paw.core.physics.bump"
 
+local DataRegistry = require "core.DataRegistry"
 local AssetRegistry = require "core.AssetRegistry"
 
 --============================ Helper Methods ==============================
@@ -19,14 +20,59 @@ function Map:initialize(scene)
 	WorldObject.initialize(self, "map", scene, 0, 0)
 
 	self.bumpWorld = bump.newWorld()
+	self.objs = {}
 	local level = require("assets.map.main")
-	for _, layer in pairs(level.layers) do
-		if layer.name == "walls" then
-			for _, wall in pairs(layer.objects) do
-				self.bumpWorld:add({}, wall.x, wall.y, wall.width + 0.0001, wall.height + 0.0001)
+	local emptyIndex = 0
+	for _, layer in pairs(level.layers or {}) do
+		self.objs[layer.name] = {}
+		print("Processing layer: ", layer.name)
+		for _, tiledObj in pairs(layer.objects or {}) do
+			local obj = {
+				x = tiledObj.x, y = tiledObj.y, 
+				phyW = tiledObj.width + 0.0001, phyH = tiledObj.height + 0.0001,
+				ID = tiledObj.name,
+				layer = layer.name,
+				currentFrame = 0,
+			}
+			
+			self.bumpWorld:add(obj, obj.x, obj.y, obj.phyW, obj.phyH)
+
+			if layer.name == "walls" then
+				obj.ID = "wall"
+			elseif layer.name == "doors" then
+				obj.opened = false
+			elseif layer.name == "dialogues" then
+			elseif layer.name == "searchables" then
+				if not obj.ID then
+					obj.ID = "empty_container_" .. tostring(emptyIndex)
+					emptyIndex = emptyIndex + 1
+				end
+				obj.centerX = obj.x + obj.phyW / 2
+				obj.centerY = obj.y + obj.phyH / 2
+			elseif layer.name == "pickables" then
+				obj.centerX = obj.x + obj.phyW / 2
+				obj.centerY = obj.y + obj.phyH / 2
+				obj.sprite = true
+			elseif layer.name == "pz_candles" then
+			elseif layer.name == "pz_push" then
+			elseif layer.name == "pz_symbol_sorter" then
+			elseif layer.name == "pz_ritual" then
+			end
+
+			assert(obj.ID, "Object with no ID from layer: " .. tostring(layer.name))
+			self.objs[layer.name][obj.ID] = obj
+			DataRegistry:applyStats(obj)
+			if obj.sprite then
+				print(obj.ID)
+				obj.sprite, obj.sx, obj.sy = AssetRegistry:getSprObj(obj)
 			end
 		end
 	end
+
+--	self.objs.doors.outside = {}
+
+	self.objs.doors.ritual.opened = true
+
 end
 
 --============================ Core API ==============================
@@ -42,6 +88,10 @@ function Map:draw(g2d)
 	g2d.setColor(b, b, b, 1)
 	g2d.draw(spr, self.pos.x, self.pos.y, 0, self.ZOOM, self.ZOOM)
 	g2d.setColor(1, 1, 1, 1)
+
+	for k, v in pairs(self.objs.pickables) do
+		g2d.draw(v.sprite, v.x, v.y, nil, v.sx, v.sy)
+	end
 
 	if DEBUG.DRAW_BOUNDING_BOXES then
 		for k, v in pairs(self.bumpWorld:getItems()) do

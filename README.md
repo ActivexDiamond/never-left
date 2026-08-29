@@ -19,5 +19,5 @@ ESC   | Quit (immediately closes the game).
 # Credit
 Made in 48 hours for the 2026 Iraq Game Jam:
 - Dulfiqar 'Active Diamond' H. Al-Safi       /    Development & Game Design 
-- Hasan 'Shawarma' Al-Sala                   /    Development & Game Design
-- Vick                                       /    Art, Level Design & Game Design
+- Hasan Shawarma                             /    Development & Game Design
+- Vick VI                                    /    Art, Level Design & Game Design
