@@ -5,7 +5,7 @@ DEBUG = {
 
 	SHOW_LOVE_VERSION = false,
 	SHOW_FPS = false,
-	
+
 	DISABLE_SHADERS = true,
 	MUTE_AUDIO = false,
 
@@ -13,6 +13,9 @@ DEBUG = {
 	DRAW_INTERACT_BOX = false,
 }
 
+
+
+ 
 AUDIO = {
 	SFX = {
 		-- gameover.mp3 by bsp7176 -- https://freesound.org/s/570633/ -- License: Attribution NonCommercial 3.0
@@ -29,7 +32,12 @@ AUDIO = {
 
 		basmentsound2 = love.audio.newSource("assets/sfx/basmenthorrorsound2.wav", "static"),
 		
-		raining = love.audio.newSource("assets/sfx/raining.mp3", "static"),
+		raining = love.audio.newSource("assets/sfx/raining.mp3", "stream"),
+ 
+	 
+
+		walkingg = love.audio.newSource("assets/sfx/walk.mp3", "static"),
+  
 
 		rainingthunder = love.audio.newSource("assets/sfx/rainingthunder.mp3", "static"),
 
@@ -68,6 +76,8 @@ AUDIO = {
 ---@param pitch number? The pitch variance, if any. between 1 and 100. [default=nil]
 ---@param chance number? The chance of actually playing the audio. 1 is guranteed. Between 0 and 1. [default=1]
 function PLAY_SOUND(src, volume, pitch, chance)
+	if not src then return end
+
 	volume = volume or 1
 	chance = chance or 1
 
