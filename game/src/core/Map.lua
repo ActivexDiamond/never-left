@@ -105,7 +105,9 @@ end
 
 --============================ Internals ==============================
 Map[EvKeyPress] = function(self, e)
-	
+	if e.key == 'space' then
+		PLAY_SOUND(AUDIO.SFX.clockticking, nil, nil, 0.1)
+	end
 end
 
 --============================ Getters / Setters ==============================

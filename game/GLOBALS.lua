@@ -26,7 +26,6 @@ AUDIO = {
 
 		basmentsound = love.audio.newSource("assets/sfx/basmenthorrorsound.wav", "static"),
 
-
 		basmentsound2 = love.audio.newSource("assets/sfx/basmenthorrorsound2.wav", "static"),
 		
 		raining = love.audio.newSource("assets/sfx/raining.mp3", "static"),
@@ -62,7 +61,41 @@ AUDIO = {
 	},
 }
 
+---Play a sound, optionally with some variance. Pauses previous instances, if any.
+---@param src love.Source The audio source to play.
+---@param volume number? The volume. [default=1]
+---@param pitch number? The pitch variance, if any. between 1 and 100. [default=nil]
+---@param chance number? The chance of actually playing the audio. 1 is guranteed. Between 0 and 1. [default=1]
+function PLAY_SOUND(src, volume, pitch, chance)
+	volume = volume or 1
+	chance = chance or 1
 
+	src:setPitch(1)
+	src:setVolume(volume)
+
+	if pitch then
+			local dir = love.math.random(1, 2)
+		if dir == 1 then
+			local variance = (100 - love.math.random(1, pitch)) / 100
+			print(variance)
+			src:setPitch(variance)
+		else
+			local variance = 1 + love.math.random(1, pitch) / 100
+			print(variance)
+			src:setPitch(variance)
+		end
+	end
+
+	if chance < 1 then
+		if love.math.random() < chance then
+			src:stop()
+			src:play()
+		end
+	else
+		src:stop()
+		src:play()
+	end
+end
 
 local os = love.system.getOS()
 if os == "Web" or os == "Android" then
