@@ -47,10 +47,13 @@ function Map:initialize(scene)
 			elseif layer.name == "doors" then
 				obj.opened = false
 			elseif layer.name == "dialogues" then
+				obj.sprite = true
 			elseif layer.name == "searchables" then
 				if #obj.ID == 0 then
 					obj.ID = "empty_container_" .. tostring(emptyIndex)
 					emptyIndex = emptyIndex + 1
+				else
+					obj.sprite = true
 				end
 				obj.collected = false
 			elseif layer.name == "pickables" then
@@ -66,6 +69,8 @@ function Map:initialize(scene)
 			DataRegistry:applyStats(obj)
 			if obj.sprite then
 				print(obj.ID)
+				obj.w = obj.w or 8
+				obj.h = obj.h or 8
 				obj.sprite, obj.sx, obj.sy = AssetRegistry:getSprObj(obj)
 			end
 		end
@@ -86,6 +91,7 @@ end
 
 function Map:draw(g2d)
 --	WorldObject.draw(self, g2d)
+	self.w = 400 self.h = 260
 	local spr, sx, sy = AssetRegistry:getSprObj(self)
 	local b = 1
 	g2d.setColor(b, b, b, 1)

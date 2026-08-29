@@ -166,8 +166,8 @@ function Player:draw(g2d)
 			if m.sprite then
 				local sw, sh = GAME:getGameDimensions()
 				local iw, ih = m.sprite:getDimensions()
-				local x = (sw - iw) / 2
-				local y = ((sh - ih) / 2) - 23
+				local x = (sw - 36) / 2
+				local y = ((sh - 36) / 2) - 23
 				local sx = 1
 				local sy = 1
 				g2d.draw(m.sprite, x, y, nil, 36 / iw, 36 / ih)
@@ -177,7 +177,13 @@ function Player:draw(g2d)
 				local dy = sh - dh
 				g2d.draw(self.dialogueBoxSprite, dx, dy) 
 				g2d.printf(m.dialogue, dx + 7, dy + 2, dw - 11)
-			end
+		else
+				local sw, sh = GAME:getGameDimensions()
+				local dw, dh = self.dialogueBoxSprite:getDimensions()
+				local dx = (sw - dw) / 2
+				local dy = sh - dh
+				g2d.draw(self.dialogueBoxSprite, dx, dy) 
+				g2d.printf("> There is nothing here...", dx + 7, dy + 15, dw - 11)end
 		g2d.pop()
 	end
 end
@@ -196,16 +202,17 @@ end
 function Player:_onInteractInput()
 	if self.itemMenu.visible then
 		self.itemMenu.visible = false
+		self.itemMenu.sprite = nil
 		return
 	end
 
 	if not self.nearbyInteractable then return end
 
 	local obj = self.nearbyInteractable
-	if obj.layer == "pickables" then
+	if obj.layer == "pickables" or obj.layer == 'dialogues' or obj.layer == 'searchables' then
 		self:pickupItem(obj)
-		self.scene.map.bumpWorld:remove(obj)
-		self.scene.map.objs.pickables[obj.ID] = nil	
+--		self.scene.map.bumpWorld:remove(obj)
+--		self.scene.map.objs.pickables[obj.ID] = nil	
 	end
 end
 
