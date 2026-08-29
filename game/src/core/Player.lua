@@ -167,16 +167,16 @@ function Player:draw(g2d)
 				local sw, sh = GAME:getGameDimensions()
 				local iw, ih = m.sprite:getDimensions()
 				local x = (sw - iw) / 2
-				local y = ((sh - ih) / 2) - 20
+				local y = ((sh - ih) / 2) - 23
 				local sx = 1
 				local sy = 1
-				g2d.draw(m.sprite, x, y, nil, sx, sy)
+				g2d.draw(m.sprite, x, y, nil, 36 / iw, 36 / ih)
 
 				local dw, dh = self.dialogueBoxSprite:getDimensions()
 				local dx = (sw - dw) / 2
-				local dy = sh - dh - 5
+				local dy = sh - dh
 				g2d.draw(self.dialogueBoxSprite, dx, dy) 
-				g2d.printf(m.dialogue, dx, dy, dw)
+				g2d.printf(m.dialogue, dx + 7, dy + 2, dw - 11)
 			end
 		g2d.pop()
 	end
@@ -222,16 +222,14 @@ end
 function Player:_showItemMenu(item)
 	local m = self.itemMenu
 	m.visible = true
-	for k, v in pairs(item) do print(k, v) end
 	if item.pickUpItem then
 		local data = {ID = item.pickUpItem}
 		DataRegistry:applyStats(data)
 		m.sprite = AssetRegistry:getSprObj(data)
-		print('asdsad',m.sprite)
-	elseif m.sprite then
+	elseif item.sprite then
 		m.sprite = item.sprite
 	end
-	m.dialogue = item.dialogue or "adasdasda"
+	m.dialogue = item.dialogue or "Lorem ipsum."
 end
 
 
@@ -265,7 +263,7 @@ function Player:_collisionFilter(item, other)
 	if other.layer == "walls" then
 		return 'slide'
 	elseif other.layer == "doors" and not other.opened then
-		return 'slide'
+		return false--'slide'
 	elseif other.layer == "pickables" then
 		return 'cross'
 	else

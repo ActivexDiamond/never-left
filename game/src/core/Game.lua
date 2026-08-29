@@ -81,7 +81,7 @@ Game.WINDOW_TARGET_CONFIGS = {
 	STRETCHED = false,
 
 	--Putting this here because `push` breaks `love.graphics.setBackgroundColor()`.
-	INITIAL_BACKGROUND_COLOR = {uColor.fromHex("#2e3bb7ff")},
+	INITIAL_BACKGROUND_COLOR = {uColor.fromHex("#262626ff")},
 }
 
 Game.ESceneIds = {
@@ -123,7 +123,7 @@ Game[EvKeyPress] = function(self, e)
 	--	DEBUG.DISABLE_SHADERS = not DEBUG.DISABLE_SHADERS 
 	elseif e.key == 'f11' then
 		push:switchFullscreen(self.lastWindowW, self.lastWindowH)
-	elseif e.key == 'escape' then
+	elseif e.key == 'escape' and DEBUG.DEV_MODE then
 		love.event.quit()
 	end
 end
