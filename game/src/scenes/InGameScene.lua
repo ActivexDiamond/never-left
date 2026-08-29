@@ -31,14 +31,21 @@ end
 
 function InGameScene:update(dt)
 	Scene.update(self, dt)
-	print(self.player.pos, self.map.pos)
 end
 
 function InGameScene:draw(g2d)
---	Scene.draw(self, g2d)
-	self.player:draw(g2d)
-	self.map:draw(g2d)
-	self.player:lateDraw(g2d)
+	g2d.push('all')
+		local px, py, pw, ph = self.player:getBoundingBox()
+		local sw, sh = GAME:getGameDimensions()
+		local cameraX = -px +((sw - pw) / 2)
+		local cameraY = -py +((sh - ph) / 2)
+
+		g2d.translate(cameraX, cameraY)
+	--	Scene.draw(self, g2d)
+		self.player:draw(g2d)
+		self.map:draw(g2d)
+		self.player:lateDraw(g2d)
+	g2d.pop()
 end
 
 --============================ API ==============================
@@ -51,7 +58,7 @@ end
 
 function InGameScene:enter()
 	Scene.enter(self)
-		GAME:setBackgroundColor({0, 0, 0})
+	GAME:setBackgroundColor({0, 0, 0})
 end
 
 --============================ Internals ==============================

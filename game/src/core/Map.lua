@@ -22,23 +22,14 @@ end
 
 function Map:update(dt)
 	WorldObject.update(self, dt)
-	local p = self.scene.player
-	self.pos.x = p.pos.x
-	self.pos.y = p.pos.y
 end
 
 function Map:draw(g2d)
 	WorldObject.draw(self, g2d)
 	local spr, sx, sy = AssetRegistry:getSprObj(self)
 	g2d.setColor(1, 1, 1)
-	--[[
-	local iw, ih = spr:getDimensions()
-	local sw, sh = GAME:getGameDimensions()
-	local xOff = sw - iw / 2
-	local yOff = sh - ih / 2
-	g2d.draw(spr, self.x + xOff, self.y + yOff, 0, 1, 1)
-	--]]
-	g2d.draw(spr, -self.pos.x, -self.pos.y, 0, self.ZOOM, self.ZOOM)
+	print(self.pos)
+	g2d.draw(spr, self.pos.x, self.pos.y, 0, self.ZOOM, self.ZOOM)
 end
 
 --============================ API ==============================

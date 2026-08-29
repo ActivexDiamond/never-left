@@ -3,7 +3,7 @@ function love.conf(t)
   -- See https://www.love2d.org/wiki/Config_Files for more information.
 
    t.identity = "Escape The Curse"                    -- The name of the save directory (string)
-   t.version = "12.0"                -- The L�VE version this game was made for (string)
+--   t.version = "12.0"                -- The L�VE version this game was made for (string)
    t.console = true                   -- Attach a console (boolean, Windows only)
   -- t.accelerometerjoystick = true      -- Enable the accelerometer on iOS and Android by exposing it as a Joystick (boolean)
   -- t.externalstorage = false           -- True to save files (and read from the save directory) in external storage on Android (boolean) 

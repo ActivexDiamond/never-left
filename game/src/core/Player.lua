@@ -17,9 +17,12 @@ local Player = middleclass("Player", WorldObject)
 function Player:initialize(scene, x, y)
 	WorldObject.initialize(self, "player", scene, x, y)
 	self.lightSprite, self.lightSpriteSx, self.lightSpriteSy = 
-		AssetRegistry:getSprObj({ID = "light_sprite", w = 64, h = 64})
+			AssetRegistry:getSprObj({
+				ID = "light_sprite", 
+				w = self.lightRadius*4, 
+				h = self.lightRadius*4})
 	self._lightMaskWrapper = function()
-		return self:_lightMask(love.graphics)
+		return self:_drawLightSprite(love.graphics)
 	end
 end
 
@@ -46,37 +49,39 @@ function Player:update(dt)
 end
 
 function Player:draw(g2d)
-	WorldObject.draw(self, g2d)
+--	WorldObject.draw(self, g2d)
 	--push:setupCanvas("stencil_canvas")
+--	g2d.rectangle('fill', self:getBoundingBox())
 	g2d.stencil(self._lightMaskWrapper, 'replace', 1)
 	g2d.setStencilTest('greater', 0)
 --	g2d.setColor(1, 0,0,1)
-	self:_lightMask(g2d)
+	self:_drawLightSprite(g2d)
 --	g2d.setColor(1, 1,0,1)
 --	g2d.rectangle('fill', self.pos.x, self.pos.y, 20, 20)
 end
 
 function Player:lateDraw(g2d)
-	local sw, sh = GAME:getGameDimensions()
-	local x = sw / 2 - self.lightRadius * 2
-	local y = sh / 2 - self.lightRadius * 2
-	local diameter = self.lightRadius * 2
-	g2d.draw(self.lightSprite, x, y, nil, self.lightSpriteSx, self.lightSpriteSy)
+	self:_drawLightSprite(g2d)
 end
 
 
 --============================ API ==============================
 
 --============================ Internals ==============================
-function Player:_lightMask(g2d)
 
+function Player:_drawLightSprite(g2d)
 	local sw, sh = GAME:getGameDimensions()
-	local diameter = self.lightRadius * 2
-	g2d.circle('fill', sw/2, sh/2, diameter, diameter)
+	local iw, ih = self.lightSprite:getDimensions()
+	local sz = self.lightSpriteSx * iw
+	local x = self.pos.x - sz / 4
+	local y = self.pos.y - sz / 4
+--	print(sw, sh, sz, (sw - sz) / 2, x, y)
+	g2d.draw(self.lightSprite, x, y, nil, self.lightSpriteSx, self.lightSpriteSy)
+	
 	--[[
-
-	local x = self.pos.x - self.lightRadius
-	local y = self.pos.y - self.lightRadius
+	local sw, sh = GAME:getGameDimensions()
+	local x = self.pos.x + self.lightRadius
+	local y = self.pos.y + self.lightRadius
 	local diameter = self.lightRadius * 2
 	g2d.circle('fill', x, y, diameter, diameter)
 	--]]
