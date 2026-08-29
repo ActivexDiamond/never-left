@@ -11,6 +11,7 @@ DEBUG = {
 
 	DRAW_BOUNDING_BOXES = false,
 	DRAW_INTERACT_BOX = false,
+	
 }
 
 
@@ -111,6 +112,7 @@ end
 local os = love.system.getOS()
 if os == "Web" or os == "Android" then
 	DEBUG.SKIP_LOGOS = false
+	DEBUG.DEV_MODE = false
 	DEBUG.MUTE_AUDIO = false
 	DEBUG.INITIAL_SCENE = nil
 	DEBUG.DRAW_INTERACT_BOX = false
@@ -120,6 +122,7 @@ end
 
 if love.filesystem.isFused() then
 	DEBUG.SKIP_LOGOS = false
+	DEBUG.DEV_MODE = false
 	DEBUG.MUTE_AUDIO = false
 	DEBUG.SHOW_FPS = false
 	DEBUG.SHOW_LOVE_VERSION = false

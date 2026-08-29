@@ -42,7 +42,7 @@ return {
 		game = {
 			targetWindowH = 640 * 2,
 			targetWindowW = 360 * 2,
-			name = "Escape The Curse",
+			name = "Never Left",
 			globalsFile = "GLOBALS",
 			entryPoint = "core.Game",
 		},

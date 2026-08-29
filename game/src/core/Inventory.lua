@@ -44,7 +44,7 @@ function Inventory:draw(g2d)
 				g2d.rectangle('line', x, y, self.slotVisualSize, self.slotVisualSize)
 				local item = self.items[slotX + slotY * 3] 
 				if item then
-					g2d.draw(item.sprite, x, y, nil, item.sx, item.sy)
+--					g2d.draw(item.sprite, x, y, nil, item.sx, item.sy)
 				end
 			end
 				x = x + (self.slotVisualSize + self.slotVisualPadding)
