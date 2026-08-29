@@ -9,7 +9,7 @@
 1
 </data>
  </layer>
- <objectgroup id="2" name="walls">
+ <objectgroup id="2" name="walls" visible="0">
   <object id="3" x="82.0856" y="41.5495" width="5.06701" height="126.169"/>
   <object id="4" x="87.1526" y="160.371" width="17.2278" height="7.34717"/>
   <object id="5" x="104.38" y="160.371" width="2.0268" height="3.04021"/>
@@ -119,10 +119,9 @@
   <object id="119" x="211.5" y="200.75" width="13.75" height="10.5"/>
  </objectgroup>
  <objectgroup id="3" name="searchables">
-  <object id="131" x="288.182" y="173.818" width="14.4545" height="11.7273"/>
-  <object id="132" name="matches" x="287.909" y="185.818" width="14.6364" height="13.0909"/>
-  <object id="133" x="277.182" y="198.727" width="13.4545" height="14.7273"/>
-  <object id="134" name="symbol_3" x="266.182" y="196.818" width="11.0909" height="12"/>
+  <object id="131" x="288.182" y="174.068" width="14.4545" height="8.1023"/>
+  <object id="133" name="matches" x="285.182" y="194.727" width="17.3295" height="19.1023"/>
+  <object id="134" name="symbol_3" x="267.182" y="199.693" width="7.9659" height="6.875"/>
   <object id="137" name="polaroid" x="216.063" y="85.625" width="7.25" height="7.25"/>
   <object id="140" x="183.813" y="46.625" width="17.9375" height="16.5"/>
   <object id="141" x="242.813" y="46.4375" width="15.125" height="14.3125"/>
@@ -132,28 +131,28 @@
   <object id="147" x="281" y="119" width="12" height="10"/>
   <object id="149" x="239.625" y="104.5" width="10.5" height="8.75"/>
   <object id="150" x="209.875" y="133.125" width="42" height="16.5"/>
-  <object id="151" x="184.25" y="99.25" width="17.625" height="13.125"/>
+  <object id="151" x="184.25" y="99.25" width="14.125" height="13.125"/>
   <object id="157" x="156.25" y="48.3125" width="14.5625" height="12.6875"/>
   <object id="159" x="97.3125" y="48.25" width="14.6875" height="12.875"/>
   <object id="160" x="122.813" y="110.938" width="18.875" height="7.125"/>
   <object id="161" x="91.9091" y="122.182" width="16" height="13.7273"/>
   <object id="162" name="symbol_1" x="92.0909" y="138.091" width="15.9091" height="12.7273"/>
   <object id="163" x="210.875" y="201.375" width="16.625" height="11.25"/>
-  <object id="164" x="75.7273" y="182.636" width="7.72727" height="17.6364"/>
+  <object id="164" x="75.7273" y="189.261" width="7.72727" height="4.0114"/>
   <object id="165" x="239.25" y="88.5" width="16.25" height="5.75"/>
   <object id="168" name="symbol_2" x="209.364" y="103" width="5" height="2.90909"/>
   <object id="172" x="120.75" y="198.75" width="10.75" height="11.25"/>
   <object id="173" x="264.875" y="84.25" width="12.75" height="10"/>
   <object id="175" x="125.625" y="78" width="13.625" height="12.375"/>
-  <object id="176" x="81.625" y="176.125" width="6.25" height="7.375"/>
+  <object id="176" x="83" y="177.375" width="4.25" height="4.625"/>
   <object id="177" x="241.875" y="161.625" width="16.25" height="30.5"/>
  </objectgroup>
  <objectgroup id="10" name="pickables">
   <object id="193" name="bathroom_key" x="179.273" y="186.182" width="7.18182" height="6.09091"/>
   <object id="192" name="missing_page" x="147.727" y="198.091" width="7.09091" height="7.36364"/>
-  <object id="178" name="chalk" x="91.4545" y="180" width="7.45455" height="9.18182"/>
+  <object id="178" name="chalk_floor" x="76.4545" y="204.875" width="7.45455" height="6.80682"/>
  </objectgroup>
- <objectgroup id="4" name="doors">
+ <objectgroup id="4" name="doors" visible="0">
   <object id="122" name="study" x="181" y="77.4545" width="1.72727" height="15"/>
   <object id="123" name="bedroom" x="148.545" y="118.091" width="19.2727" height="1.81818"/>
   <object id="124" name="ritual" x="106.091" y="160" width="17.0909" height="1.81818"/>
@@ -168,22 +167,22 @@
   <object id="182" name="target" x="169.091" y="148.182" width="5.45455" height="7.81818"/>
  </objectgroup>
  <objectgroup id="7" name="pz_push">
-  <object id="183" x="93.5625" y="83.8125">
+  <object id="183" name="pushable_counter" x="93.5625" y="83.8125">
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="8" name="pz_candles">
-  <object id="187" x="187.75" y="48.5">
+  <object id="187" name="candle_1" x="187.75" y="48.5">
    <point/>
   </object>
-  <object id="188" x="192.75" y="53.5">
+  <object id="188" name="candle_2" x="192.75" y="53.5">
    <point/>
   </object>
-  <object id="189" x="198.375" y="48">
+  <object id="189" name="candle_3" x="198.375" y="48">
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="9" name="pz_ritual">
-  <object id="190" name="target" x="90" y="178.75" width="34.125" height="26.5"/>
+  <object id="190" name="target" x="100.125" y="185.375" width="15.875" height="13"/>
  </objectgroup>
 </map>

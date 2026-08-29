@@ -37,21 +37,23 @@ function Map:initialize(scene)
 			
 			self.bumpWorld:add(obj, obj.x, obj.y, obj.phyW, obj.phyH)
 
+			--Highlight / sparkle
+			if layer.name ~= "walls" then	
+				obj.centerX = obj.x + obj.phyW / 2
+				obj.centerY = obj.y + obj.phyH / 2
+			end
 			if layer.name == "walls" then
 				obj.ID = "wall"
 			elseif layer.name == "doors" then
 				obj.opened = false
 			elseif layer.name == "dialogues" then
 			elseif layer.name == "searchables" then
-				if not obj.ID then
+				if #obj.ID == 0 then
 					obj.ID = "empty_container_" .. tostring(emptyIndex)
 					emptyIndex = emptyIndex + 1
 				end
-				obj.centerX = obj.x + obj.phyW / 2
-				obj.centerY = obj.y + obj.phyH / 2
+				obj.collected = false
 			elseif layer.name == "pickables" then
-				obj.centerX = obj.x + obj.phyW / 2
-				obj.centerY = obj.y + obj.phyH / 2
 				obj.sprite = true
 			elseif layer.name == "pz_candles" then
 			elseif layer.name == "pz_push" then
@@ -59,7 +61,7 @@ function Map:initialize(scene)
 			elseif layer.name == "pz_ritual" then
 			end
 
-			assert(obj.ID, "Object with no ID from layer: " .. tostring(layer.name))
+			assert(obj.ID and #obj.ID > 0, "Object with no ID from layer: " .. tostring(layer.name))
 			self.objs[layer.name][obj.ID] = obj
 			DataRegistry:applyStats(obj)
 			if obj.sprite then
@@ -72,6 +74,7 @@ function Map:initialize(scene)
 --	self.objs.doors.outside = {}
 
 	self.objs.doors.ritual.opened = true
+	self.objs.doors.basement.opened = true
 
 end
 
@@ -95,8 +98,8 @@ function Map:draw(g2d)
 
 	if DEBUG.DRAW_BOUNDING_BOXES then
 		for k, v in pairs(self.bumpWorld:getItems()) do
-			g2d.setColor(1, 0, 0, 1)
 			g2d.rectangle('fill', self.bumpWorld:getRect(v))
+			g2d.setColor(1, 0, 0, 1)
 		end
 	end
 end
@@ -106,7 +109,7 @@ end
 --============================ Internals ==============================
 Map[EvKeyPress] = function(self, e)
 	if e.key == 'space' then
-		PLAY_SOUND(AUDIO.SFX.clockticking, nil, nil, 0.1)
+--		PLAY_SOUND(AUDIO.SFX.clockticking, nil, nil, 0.1)
 	end
 end
 

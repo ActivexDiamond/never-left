@@ -10,6 +10,7 @@ DEBUG = {
 	MUTE_AUDIO = false,
 
 	DRAW_BOUNDING_BOXES = false,
+	DRAW_INTERACT_BOX = false,
 }
 
 AUDIO = {
@@ -100,12 +101,11 @@ end
 local os = love.system.getOS()
 if os == "Web" or os == "Android" then
 	DEBUG.SKIP_LOGOS = false
-	DEBUG.DISABLE_SHADERS = false
 	DEBUG.MUTE_AUDIO = false
 	DEBUG.INITIAL_SCENE = nil
+	DEBUG.DRAW_INTERACT_BOX = false
 end
 if os == "Android" then
-	DEBUG.DISABLE_SHADERS = true
 end
 
 if love.filesystem.isFused() then
@@ -113,6 +113,7 @@ if love.filesystem.isFused() then
 	DEBUG.MUTE_AUDIO = false
 	DEBUG.SHOW_FPS = false
 	DEBUG.SHOW_LOVE_VERSION = false
+	DEBUG.DRAW_INTERACT_BOX = false
 end
 
 if DEBUG.MUTE_AUDIO then

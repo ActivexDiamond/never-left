@@ -23,6 +23,8 @@ function InGameScene:initialize()
 	self.player = Player(self, self.map:getCenterPoint())
 	self:addObject(self.player)
 --	self:addObject(ItemManager(self))
+
+	self.font = love.graphics.newFont("assets/fonts/smallest_pixel-7.ttf")
 end
 
 --============================ Constants ==============================
@@ -35,12 +37,15 @@ end
 
 function InGameScene:draw(g2d)
 	g2d.push('all')
+		self.font = love.graphics.newFont("assets/fonts/smallest_pixel-7.ttf", 10)
+		self.font:setFilter('nearest', 'nearest', 0)
+		g2d.setFont(self.font)
 		local px, py, pw, ph = self.player:getBoundingBox()
 		local sw, sh = GAME:getGameDimensions()
-		local cameraX = -px +((sw - pw) / 2)
-		local cameraY = -py +((sh - ph) / 2)
+		self.cameraX = -px +((sw - pw) / 2)
+		self.cameraY = -py +((sh - ph) / 2)
 
-		g2d.translate(cameraX, cameraY)
+		g2d.translate(self.cameraX, self.cameraY)
 
 	--	Scene.draw(self, g2d)
 		self.player:earlyDraw(g2d)
