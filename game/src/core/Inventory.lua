@@ -19,7 +19,7 @@ function Inventory:initialize(id, parent)
 
 	local sw, sh = GAME:getGameDimensions()
 	self.x = sw - (self.slotVisualSize * 3) - (self.slotVisualPadding * 3)
-	self.y = self.slotVisualSize * 3 +self.slotVisualPadding * 3 + 2
+	self.y = self.slotVisualSize * 4 + self.slotVisualPadding * 4 + 2
 end
 
 --============================ Core API ==============================
@@ -39,12 +39,17 @@ function Inventory:draw(g2d)
 		
 		local x, y = self.x, self.y
 		for slotX = 1, 3 do
-			for slotY = 1, 3 do
+			for slotY = 1, 4 do
 				y = y - (self.slotVisualSize + self.slotVisualPadding)
+				g2d.setColor(self.slotColor, self.slotColor, self.slotColor, 1)
 				g2d.rectangle('line', x, y, self.slotVisualSize, self.slotVisualSize)
-				local item = self.items[slotX + slotY * 3] 
+				
+				local item = self.items[slotX + (slotY - 1) * 3] 
 				if item then
-					g2d.draw(item.sprite, x, y, nil, item.sx, item.sy)
+					g2d.setColor(1, 1, 1, 1)
+					print(x, y, item.sx, item.sy)
+					local iw, ih = item.sprite:getDimensions()
+					g2d.draw(item.sprite, x + 0.5, y + 0.5, nil, (self.slotVisualSize - 1) / ih, (self.slotVisualSize - 1)/ ih)
 				end
 			end
 				x = x + (self.slotVisualSize + self.slotVisualPadding)
@@ -56,7 +61,9 @@ end
 --============================ API ==============================
 
 function Inventory:addItem(item)
-	table.insert(self.items, item)	
+	
+	if item.ID:sub(1, 8) == "empty_co" then return end
+	table.insert(self.items, item)
 end
 
 

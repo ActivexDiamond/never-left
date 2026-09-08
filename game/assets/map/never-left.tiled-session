@@ -6,11 +6,11 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "main.tmx": {
-            "scale": 4,
-            "selectedLayer": 1,
+            "scale": 8,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 213.375,
-                "y": 128.125
+                "x": 215.125,
+                "y": 87.9375
             }
         },
         "map.tsx": {

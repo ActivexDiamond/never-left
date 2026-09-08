@@ -47,10 +47,13 @@ function Map:initialize(scene)
 			elseif layer.name == "doors" then
 				obj.opened = false
 			elseif layer.name == "dialogues" then
+				obj.sprite = true
 			elseif layer.name == "searchables" then
 				if #obj.ID == 0 then
 					obj.ID = "empty_container_" .. tostring(emptyIndex)
 					emptyIndex = emptyIndex + 1
+				else
+					obj.sprite = true
 				end
 				obj.collected = false
 			elseif layer.name == "pickables" then
@@ -66,15 +69,12 @@ function Map:initialize(scene)
 			DataRegistry:applyStats(obj)
 			if obj.sprite then
 				print(obj.ID)
+				obj.w = obj.w or 8
+				obj.h = obj.h or 8
 				obj.sprite, obj.sx, obj.sy = AssetRegistry:getSprObj(obj)
 			end
 		end
 	end
-
---	self.objs.doors.outside = {}
-
-	self.objs.doors.ritual.opened = true
-	self.objs.doors.basement.opened = true
 
 end
 
@@ -86,6 +86,7 @@ end
 
 function Map:draw(g2d)
 --	WorldObject.draw(self, g2d)
+	self.w = 400 self.h = 260
 	local spr, sx, sy = AssetRegistry:getSprObj(self)
 	local b = 1
 	g2d.setColor(b, b, b, 1)
@@ -96,6 +97,13 @@ function Map:draw(g2d)
 		g2d.draw(v.sprite, v.x, v.y, nil, v.sx, v.sy)
 	end
 
+	g2d.setColor(0, 0, 0, 1)
+	for k, v in pairs(self.objs.doors) do
+		if not v.opened then
+			g2d.rectangle('fill', self.bumpWorld:getRect(v))
+		end
+	end
+	g2d.setColor(1, 1, 1, 1)
 	if DEBUG.DRAW_BOUNDING_BOXES then
 		for k, v in pairs(self.bumpWorld:getItems()) do
 			g2d.rectangle('fill', self.bumpWorld:getRect(v))

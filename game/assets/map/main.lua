@@ -10,7 +10,7 @@ return {
   tilewidth = 400,
   tileheight = 260,
   nextlayerid = 11,
-  nextobjectid = 194,
+  nextobjectid = 195,
   properties = {},
   tilesets = {
     {
@@ -896,20 +896,6 @@ return {
           properties = {}
         },
         {
-          id = 68,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 331,
-          y = 79,
-          width = 3,
-          height = 72.75,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 69,
           name = "",
           type = "",
@@ -918,20 +904,6 @@ return {
           y = 68.5,
           width = 117.5,
           height = 30.5,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 70,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 333,
-          y = 67.75,
-          width = 80,
-          height = 98.75,
           rotation = 0,
           opacity = 1,
           visible = true,
@@ -1044,20 +1016,6 @@ return {
           y = 127.063,
           width = 6.875,
           height = 3.875,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 79,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 329.273,
-          y = 98.3636,
-          width = 5.09091,
-          height = 19.1818,
           rotation = 0,
           opacity = 1,
           visible = true,
@@ -1552,6 +1510,20 @@ return {
           opacity = 1,
           visible = true,
           properties = {}
+        },
+        {
+          id = 194,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 328.545,
+          y = 100.364,
+          width = 74.5455,
+          height = 16.1818,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {}
         }
       }
     },
@@ -1898,7 +1870,7 @@ return {
           shape = "rectangle",
           x = 264.875,
           y = 84.25,
-          width = 12.75,
+          width = 8.75,
           height = 10,
           rotation = 0,
           opacity = 1,
@@ -1921,7 +1893,7 @@ return {
         },
         {
           id = 176,
-          name = "",
+          name = "evil_dead_book",
           type = "",
           shape = "rectangle",
           x = 83,
@@ -1942,6 +1914,20 @@ return {
           y = 161.625,
           width = 16.25,
           height = 30.5,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 179,
+          name = "dg_missing_page",
+          type = "",
+          shape = "rectangle",
+          x = 210.364,
+          y = 55.0909,
+          width = 8.72727,
+          height = 14.3636,
           rotation = 0,
           opacity = 1,
           visible = true,
@@ -2013,7 +1999,7 @@ return {
       id = 4,
       name = "doors",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -2026,8 +2012,8 @@ return {
           name = "study",
           type = "",
           shape = "rectangle",
-          x = 181,
-          y = 77.4545,
+          x = 85.5,
+          y = 9.7045,
           width = 1.72727,
           height = 15,
           rotation = 0,
@@ -2120,22 +2106,7 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {
-        {
-          id = 179,
-          name = "dg_missing_page",
-          type = "",
-          shape = "rectangle",
-          x = 210.364,
-          y = 55.0909,
-          width = 8.72727,
-          height = 14.3636,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
-        }
-      }
+      objects = {}
     },
     {
       type = "objectgroup",

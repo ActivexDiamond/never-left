@@ -166,8 +166,8 @@ function Player:draw(g2d)
 			if m.sprite then
 				local sw, sh = GAME:getGameDimensions()
 				local iw, ih = m.sprite:getDimensions()
-				local x = (sw - iw) / 2
-				local y = ((sh - ih) / 2) - 23
+				local x = (sw - 36) / 2
+				local y = ((sh - 36) / 2) - 23
 				local sx = 1
 				local sy = 1
 				g2d.draw(m.sprite, x, y, nil, 36 / iw, 36 / ih)
@@ -177,7 +177,13 @@ function Player:draw(g2d)
 				local dy = sh - dh
 				g2d.draw(self.dialogueBoxSprite, dx, dy) 
 				g2d.printf(m.dialogue, dx + 7, dy + 2, dw - 11)
-			end
+		else
+				local sw, sh = GAME:getGameDimensions()
+				local dw, dh = self.dialogueBoxSprite:getDimensions()
+				local dx = (sw - dw) / 2
+				local dy = sh - dh
+				g2d.draw(self.dialogueBoxSprite, dx, dy) 
+				g2d.printf("> There is nothing here...", dx + 7, dy + 15, dw - 11)end
 		g2d.pop()
 	end
 end
@@ -196,6 +202,7 @@ end
 function Player:_onInteractInput()
 	if self.itemMenu.visible then
 		self.itemMenu.visible = false
+		self.itemMenu.sprite = nil
 		return
 	end
 
@@ -206,6 +213,11 @@ function Player:_onInteractInput()
 		self:pickupItem(obj)
 		self.scene.map.bumpWorld:remove(obj)
 		self.scene.map.objs.pickables[obj.ID] = nil	
+
+	elseif obj.layer == 'dialogues' then
+	elseif obj.layer == 'searchables' then
+		self:pickupItem(obj)
+		obj.collected = true
 	end
 end
 
@@ -213,8 +225,19 @@ end
 
 function Player:pickupItem(item)
 	print("Picked up", item)
-	self.inv:addItem(item.ID)
+	self.inv:addItem(item)
 	self:_showItemMenu(item)
+
+	for k, v in pairs(self.scene.map.objs.doors) do
+		print(v.ID, v.dialogue, v.itemCount, self, self.inv, self.inv.items)
+		if v.itemCount <= #self.inv.items then
+			v.opened = true
+		end
+	end
+
+	if #self.inv.items == 12 then
+		GAME:goTo(GAME.ESceneIds.GAME_OVER)
+	end
 end
 
 --============================ Internals ==============================
@@ -222,7 +245,9 @@ end
 function Player:_showItemMenu(item)
 	local m = self.itemMenu
 	m.visible = true
-	if item.pickUpItem then
+	if item.layer == 'searchables' and item.collected then
+		m.dialogue = "> I picked up everything useful here."
+	elseif item.pickUpItem then
 		local data = {ID = item.pickUpItem}
 		DataRegistry:applyStats(data)
 		m.sprite = AssetRegistry:getSprObj(data)
@@ -263,7 +288,7 @@ function Player:_collisionFilter(item, other)
 	if other.layer == "walls" then
 		return 'slide'
 	elseif other.layer == "doors" and not other.opened then
-		return false--'slide'
+		return 'slide'
 	elseif other.layer == "pickables" then
 		return 'cross'
 	else
