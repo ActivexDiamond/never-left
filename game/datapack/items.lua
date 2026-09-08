@@ -85,6 +85,7 @@ data{"polaroid",
 }
 
 data{"dg_missing_page",
+	pickUpItem = "book",
 	w = 8,
 	h = 8,
 	dialogue = [[> A book with a ripped out page.

@@ -66,6 +66,7 @@ function Player:initialize(scene, x, y)
 	self.scene.map.bumpWorld:add(self, self:getBoundingBox())
 
 	self.scratchRotationVector = brinevector(0, 0)
+	self.walkStepCooldown = 0
 
 	self._collisionFilterWrapper = function(item, other) 
 		return self:_collisionFilter(item, other)
@@ -99,6 +100,20 @@ function Player:update(dt)
 		self.scratchRotationVector.x = dirX
 		self.scratchRotationVector.y = dirY
 		self:setRotation(self.scratchRotationVector.angle + math.pi/2)
+
+		self.walkStepCooldown = self.walkStepCooldown - dt
+		if self.walkStepCooldown <= 0 then
+			local walkSfx = AUDIO and AUDIO.SFX and (
+				AUDIO.SFX.walkingg 
+				 
+			)
+			if walkSfx then
+				PLAY_SOUND(walkSfx, 0.35, 8, 0.7)
+			end
+			self.walkStepCooldown = 0.28
+		end
+	else
+		self.walkStepCooldown = 0
 	end
 	
 	self.light.pos.x = self.pos.x - self.light.w / 2.2
@@ -225,7 +240,7 @@ end
 
 function Player:pickupItem(item)
 	print("Picked up", item)
-	self.inv:addItem(item)
+	self.inv:addItem(item.ID)
 	self:_showItemMenu(item)
 
 	for k, v in pairs(self.scene.map.objs.doors) do
