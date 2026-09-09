@@ -7,17 +7,19 @@ DEBUG = {
 	SHOW_FPS = false,
 
 	DISABLE_SHADERS = true,
-	MUTE_AUDIO = false,
+	MUTE_AUDIO = true,
 
 	DRAW_BOUNDING_BOXES = false,
-	DRAW_INTERACT_BOX = false,
+	DRAW_INTERACT_BOX = true,
 	
 }
 
-
-
  
 AUDIO = {
+	SEARCH_SOUNDS = {
+		--HASAN: Fill this
+	},
+
 	SFX = {
 		-- gameover.mp3 by bsp7176 -- https://freesound.org/s/570633/ -- License: Attribution NonCommercial 3.0
 		pickup = love.audio.newSource("assets/sfx/pickup.mp3", "static"),
@@ -89,11 +91,9 @@ function PLAY_SOUND(src, volume, pitch, chance)
 			local dir = love.math.random(1, 2)
 		if dir == 1 then
 			local variance = (100 - love.math.random(1, pitch)) / 100
-			print(variance)
 			src:setPitch(variance)
 		else
 			local variance = 1 + love.math.random(1, pitch) / 100
-			print(variance)
 			src:setPitch(variance)
 		end
 	end

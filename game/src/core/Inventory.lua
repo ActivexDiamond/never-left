@@ -47,7 +47,6 @@ function Inventory:draw(g2d)
 				local item = self.items[slotX + (slotY - 1) * 3] 
 				if item then
 					g2d.setColor(1, 1, 1, 1)
-					print(x, y, item.sx, item.sy)
 					local iw, ih = item.sprite:getDimensions()
 					g2d.draw(item.sprite, x + 0.5, y + 0.5, nil, (self.slotVisualSize - 1) / ih, (self.slotVisualSize - 1)/ ih)
 				end
@@ -61,8 +60,6 @@ end
 --============================ API ==============================
 
 function Inventory:addItem(item)
-	
-	if item.ID:sub(1, 8) == "empty_co" then return end
 	table.insert(self.items, item)
 end
 

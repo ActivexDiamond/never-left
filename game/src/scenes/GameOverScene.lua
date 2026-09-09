@@ -14,12 +14,12 @@ local GameOverScene = middleclass("GameOverScene", Scene)
 	
 function GameOverScene:initialize()
 	Scene.initialize(self)
+	self.sprite = love.graphics.newImage("assets/spr/obj/gameover.png")
 end
 
 --============================ Core API ==============================
 function GameOverScene:update(dt)
 	Scene.update(self, dt)
-	self.sprite = love.graphics.newImage("assets/spr/obj/gameover.png")
 end
 
 function GameOverScene:draw(g2d)

@@ -1553,7 +1553,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "counter"
+          }
         },
         {
           id = 133,
@@ -1567,7 +1569,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "matches"
+          }
         },
         {
           id = 134,
@@ -1581,7 +1585,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "eggs"
+          }
         },
         {
           id = 137,
@@ -1595,7 +1601,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "polaroid"
+          }
         },
         {
           id = 140,
@@ -1609,7 +1617,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "studyroomdrawr"
+          }
         },
         {
           id = 141,
@@ -1623,7 +1633,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "studyroomdrawr"
+          }
         },
         {
           id = 142,
@@ -1637,7 +1649,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "bathtub"
+          }
         },
         {
           id = 143,
@@ -1651,7 +1665,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "razor"
+          }
         },
         {
           id = 146,
@@ -1665,7 +1681,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "plant"
+          }
         },
         {
           id = 147,
@@ -1679,7 +1697,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "plant"
+          }
         },
         {
           id = 149,
@@ -1693,7 +1713,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["missingpapages"] = ""
+          }
         },
         {
           id = 150,
@@ -1707,7 +1729,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "sofa"
+          }
         },
         {
           id = 151,
@@ -1735,7 +1759,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "nightstand"
+          }
         },
         {
           id = 159,
@@ -1749,7 +1775,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "nightstand"
+          }
         },
         {
           id = 160,
@@ -1763,7 +1791,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "closet"
+          }
         },
         {
           id = 161,
@@ -1777,7 +1807,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "plant"
+          }
         },
         {
           id = 162,
@@ -1791,7 +1823,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "plant"
+          }
         },
         {
           id = 163,
@@ -1805,7 +1839,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "plant"
+          }
         },
         {
           id = 164,
@@ -1833,7 +1869,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "studyroomcabnet"
+          }
         },
         {
           id = 168,
@@ -1861,7 +1899,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "book"
+          }
         },
         {
           id = 173,
@@ -1875,7 +1915,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "toilet"
+          }
         },
         {
           id = 175,
@@ -1889,7 +1931,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "bed"
+          }
         },
         {
           id = 176,
@@ -1903,7 +1947,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "evildeadbook"
+          }
         },
         {
           id = 177,
@@ -1917,7 +1963,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "diningtable"
+          }
         },
         {
           id = 179,
@@ -1931,7 +1979,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "bookmissingpages"
+          }
         }
       }
     },
@@ -1961,7 +2011,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "bathroomkey"
+          }
         },
         {
           id = 192,
@@ -1975,7 +2027,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "missingpage"
+          }
         },
         {
           id = 178,
@@ -2033,7 +2087,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "bedroomdoor"
+          }
         },
         {
           id = 124,
@@ -2047,7 +2103,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "ritualroomdoor"
+          }
         },
         {
           id = 125,
@@ -2061,7 +2119,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "basmentdoor"
+          }
         },
         {
           id = 126,
@@ -2075,7 +2135,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "bathroomdoor"
+          }
         },
         {
           id = 127,
@@ -2089,7 +2151,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "outsidedoor"
+          }
         }
       }
     },
@@ -2134,7 +2198,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "bookshelf"
+          }
         }
       }
     },
@@ -2164,7 +2230,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "pushablecounter"
+          }
         }
       }
     },
@@ -2252,7 +2320,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "ritualroomcarpet"
+          }
         }
       }
     }

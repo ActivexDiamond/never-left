@@ -1,35 +1,40 @@
 data{"outside",
-	itemCount = 12,
 	keyItem = nil,
-	dialogue = "> I am not ready to move on, quite yet.",
+	dialogue = [[> The door is locked.
+> A note is carved into it:
+"Everything has its place, We all follow an order."
+]]
 }
 
 data{"bathroom",
-	itemCount = 8,
 	keyItem = "bathroom_key",
-	dialogue = "> There is more to find here...",
+	dialogue = [[> This door is locked.
+> There must be a key around here somewhere...
+]],
 }
 
 data{"bedroom",
-	itemCount = 4,
 	keyItem = "crowbar",
-	dialogue = "> There is more to find here...",
+	dialogue = [[The door is boarded up. I can't get through.
+> There must be a way to break it?
+]]
 }
 
 data{"study",
-	itemCount = 99,
 	keyItem = "study_key",
-	dialogue = "> There is more to find here...",
+	dialogue = [[> This door is locked.
+> There must be a key around here somewhere...
+]],
 }
 
 data{"basement",
-	itemCount = 6,
 	keyItem = nil,
-	dialogue = "> There is more to find here...",
+	dialogue = "> This door is completely sealed shut. There doesn't seem to be any way to open it.",
 }
 
 data{"ritual",
-	itemCount = 10,
 	keyItem = "bath_salt",
-	dialogue = "> There is more to find here...",
+	dialogue = [[> Something is keeping the door shut.
+I can feel a strange presence on the other side.
+]]
 }

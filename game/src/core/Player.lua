@@ -103,6 +103,7 @@ function Player:update(dt)
 		self.scratchRotationVector.y = dirY
 		self:setRotation(self.scratchRotationVector.angle + math.pi/2)
 
+		--HASAN: I think this plays way too often.
 		self.walkStepCooldown = self.walkStepCooldown - dt
 		if self.walkStepCooldown <= 0 then
 			local walkSfx = AUDIO and AUDIO.SFX and (
@@ -180,27 +181,20 @@ function Player:draw(g2d)
 			g2d.setColor(0, 0, 0, 0.6)
 			g2d.rectangle('fill', 0, 0, GAME:getGameDimensions())
 			g2d.setColor(1, 1, 1, 1)
+			local sw, sh = GAME:getGameDimensions()
 			if m.sprite then
-				local sw, sh = GAME:getGameDimensions()
 				local iw, ih = m.sprite:getDimensions()
 				local x = (sw - 36) / 2
 				local y = ((sh - 36) / 2) - 23
 				local sx = 1
 				local sy = 1
 				g2d.draw(m.sprite, x, y, nil, 36 / iw, 36 / ih)
-
+			end
 				local dw, dh = self.dialogueBoxSprite:getDimensions()
 				local dx = (sw - dw) / 2
 				local dy = sh - dh
 				g2d.draw(self.dialogueBoxSprite, dx, dy) 
 				g2d.printf(m.dialogue, dx + 7, dy + 2, dw - 11)
-		else
-				local sw, sh = GAME:getGameDimensions()
-				local dw, dh = self.dialogueBoxSprite:getDimensions()
-				local dx = (sw - dw) / 2
-				local dy = sh - dh
-				g2d.draw(self.dialogueBoxSprite, dx, dy) 
-				g2d.printf("> There is nothing here...", dx + 7, dy + 15, dw - 11)end
 		g2d.pop()
 	end
 end
@@ -210,9 +204,9 @@ end
 
 Player[EvKeyPress] = function(self, e)
 	if e.key == 'e' then self:_onInteractInput() 
-	elseif e.key == 'g' then
-		shack:setShake(1)
-		shack:setSpeed(3)
+	elseif e.key == 'm' then
+		DEBUG.MUTE_AUDIO = not DEBUG.MUTE_AUDIO
+		love.audio.setVolume(DEBUG.MUTE_AUDIO and 0 or 1)
 	end
 end
 
@@ -224,59 +218,78 @@ function Player:_onInteractInput()
 	if self.itemMenu.visible then
 		self.itemMenu.visible = false
 		self.itemMenu.sprite = nil
+		self.itemMenu.dialogue = ""
 		return
 	end
 
 	if not self.nearbyInteractable then return end
 
 	local obj = self.nearbyInteractable
-	if obj.layer == "pickables" then
-		self:pickupItem(obj)
+	if obj.layer == "doors" then
+		--HASAN: Change the the volume and pitch to whatever sounds good.
+		PLAY_SOUND(AUDIO.SFX.opendoor, 1, 8)
+		self:_showItemMenu(obj)
+	elseif obj.layer == "pickables" then
+		--HASAN: Change the the volume and pitch to whatever sounds good.
+		PLAY_SOUND(AUDIO.SFX.pickup, 1, 8)
+		print("Picked up", obj)
+		self.inv:addItem(obj)
 
 		self.scene.map.bumpWorld:remove(obj)
 		self.scene.map.objs.pickables[obj.ID] = nil	
-
 	elseif obj.layer == 'dialogues' then
 	elseif obj.layer == 'searchables' then
-		self:pickupItem(obj)
-		obj.collected = true
+		--Show in all cases, as it handles searched containers and empty ones.
+		self:_showItemMenu(obj)
+		local sound = obj.typ and AUDIO.SEARCH_SOUNDS[obj.typ]
+		if sound then
+			--HASAN: Change the the volume and pitch to whatever sounds good.
+			PLAY_SOUND(sound, 0.35, 8)
+		end
+		if not obj.collected and obj.ID:sub(1, 8) ~= "empty_co" then
+			print("Picked up", obj)
+			self.inv:addItem(obj)
+			obj.collected = true
+		end
 	end
 end
 
 --============================ API ==============================
-
-function Player:pickupItem(item)
-	print("Picked up", item)
-	self.inv:addItem(item)
-	self:_showItemMenu(item)
-
-	for k, v in pairs(self.scene.map.objs.doors) do
-		print(v.ID, v.dialogue, v.itemCount, self, self.inv, self.inv.items)
-		if v.itemCount <= #self.inv.items then
-			v.opened = true
-		end
-	end
-
-	if #self.inv.items == 12 then
-		GAME:goTo(GAME.ESceneIds.GAME_OVER)
-	end
-end
 
 --============================ Internals ==============================
 
 function Player:_showItemMenu(item)
 	local m = self.itemMenu
 	m.visible = true
+	m.dialogue = ""
+	m.sprite = nil
+	
+	--Searched & collected container    -    SHORT CIRCUIT
 	if item.layer == 'searchables' and item.collected then
-		m.dialogue = "> I picked up everything useful here."
-	elseif item.pickUpItem then
+--		m.dialogue = "> I picked up everything useful here."
+		m.dialogue = "> I've already taken all that's useful from here."
+		m.sprite = nil
+		return
+	end
+	
+	--Empty container    -    SHORT CIRCUIT
+	if item.layer == 'searchables' and item.ID:sub(1, 8) == "empty_co" then
+		local data = {ID = item.typ}
+		DataRegistry:applyStats(data)
+		m.dialogue = data.dialogue or "Lorem ipsum."
+		return
+	end
+
+	m.dialogue = item.dialogue or "Lorem ipsum."
+	
+	--Sprite
+	if item.pickUpItem then
 		local data = {ID = item.pickUpItem}
 		DataRegistry:applyStats(data)
 		m.sprite = AssetRegistry:getSprObj(data)
 	elseif item.sprite then
 		m.sprite = item.sprite
 	end
-	m.dialogue = item.dialogue or "Lorem ipsum."
 end
 
 
@@ -295,7 +308,6 @@ function Player:_playerCollisionHandler(cols)
 		elseif other.layer == "pickables" then
 		end
 		if other.layer ~= "walls" then
-			print(other.ID)
 		end
 	end
 end

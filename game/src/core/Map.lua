@@ -37,6 +37,11 @@ function Map:initialize(scene)
 			
 			self.bumpWorld:add(obj, obj.x, obj.y, obj.phyW, obj.phyH)
 
+			--Load custom properties
+			for k, v in pairs(tiledObj.properties or {}) do
+				obj[k] = v
+			end
+
 			--Highlight / sparkle
 			if layer.name ~= "walls" then	
 				obj.centerX = obj.x + obj.phyW / 2
@@ -68,7 +73,7 @@ function Map:initialize(scene)
 			self.objs[layer.name][obj.ID] = obj
 			DataRegistry:applyStats(obj)
 			if obj.sprite then
-				print(obj.ID)
+				print("Applying stats to object: ", obj.ID)
 				obj.w = obj.w or 8
 				obj.h = obj.h or 8
 				obj.sprite, obj.sx, obj.sy = AssetRegistry:getSprObj(obj)
