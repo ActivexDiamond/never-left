@@ -7,6 +7,8 @@ local EvKeyPress = require "cat-paw.core.patterns.event.keyboard.EvKeyPress"
 local Map = require "core.Map"
 local Player = require "core.Player"
 
+local shack = require "libs.shack"
+
 --============================ Helper Methods ==============================
 
 --============================ Constructor ==============================
@@ -15,6 +17,7 @@ local Player = require "core.Player"
 local InGameScene = middleclass("InGameScene", Scene)
 	
 function InGameScene:initialize()
+
 	Scene.initialize(self)
 	self.map = Map(self)
 	self:addObject(self.map)
@@ -37,6 +40,11 @@ function InGameScene:initialize()
 	}
 end
 
+
+--  camera shake 
+
+
+
 --============================ Constants ==============================
 
 --============================ Core API ==============================
@@ -48,6 +56,7 @@ function InGameScene:update(dt)
 		self.horrorCooldown = self.horrorCooldown - dt
 		if self.horrorCooldown <= 0 then
 			self:_playRandomHorrorCue()
+			shack:setShake(10)
 			self.horrorCooldown = love.math.random(8, 18)
 		end
 	end

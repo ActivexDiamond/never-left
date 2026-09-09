@@ -9,6 +9,8 @@ local DataRegistry = require "core.DataRegistry"
 
 local Inventory = require "core.Inventory"
 
+local shack = require "libs.shack"
+
 local brinevector = require "libs.brinevector"
 
 --============================ Shaders ==============================
@@ -207,7 +209,11 @@ end
 --============================ Callbacks ==============================
 
 Player[EvKeyPress] = function(self, e)
-	if e.key == 'e' then self:_onInteractInput() end
+	if e.key == 'e' then self:_onInteractInput() 
+	elseif e.key == 'g' then
+		shack:setShake(1)
+		shack:setSpeed(3)
+	end
 end
 
 Player[EvFileChange] = function(self, e)
@@ -226,6 +232,7 @@ function Player:_onInteractInput()
 	local obj = self.nearbyInteractable
 	if obj.layer == "pickables" then
 		self:pickupItem(obj)
+
 		self.scene.map.bumpWorld:remove(obj)
 		self.scene.map.objs.pickables[obj.ID] = nil	
 
@@ -240,7 +247,7 @@ end
 
 function Player:pickupItem(item)
 	print("Picked up", item)
-	self.inv:addItem(item.ID)
+	self.inv:addItem(item)
 	self:_showItemMenu(item)
 
 	for k, v in pairs(self.scene.map.objs.doors) do

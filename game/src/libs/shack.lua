@@ -19,7 +19,8 @@ local shack = {
   shearTarget = { x = 0, y = 0 },
   
   width = love.graphics.getWidth(),
-  height = love.graphics.getHeight()
+  height = love.graphics.getHeight(),
+  speed = 7,
 }
 setmetatable(shack, shack)
 
@@ -40,9 +41,14 @@ function shack:setDimensions(width, height)
   return self
 end
 
+function shack:setSpeed(speed)
+  self.speed = speed or 7
+  return self
+end
+
 function shack:update(dt)
   
-  local _speed = 7
+  _speed = self.speed
   
   self.shaking = lerp(self.shaking, self.shakingTarget, _speed*dt)
   self.rotation = lerp(self.rotation, self.rotationTarget, _speed*dt)
