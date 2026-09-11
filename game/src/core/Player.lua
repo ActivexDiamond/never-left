@@ -251,13 +251,13 @@ function Player:_onInteractInput()
 		if obj.ID == "symbol_sorter_bookshelf" then
 			--FIXME: The physics stuff should keep track of classes. Which may be TiledObjects or children of them,
 			--    Or something similar. Not whatever this is.
+			self.frozen = not self.scene.bookshelf:isShown()
 			self.scene.bookshelf:toggleShown()
-			self.frozen = self.scene.bookshelf:isShown()
 	elseif obj.ID == "candle_desk" then
 			--FIXME: The physics stuff should keep track of classes. Which may be TiledObjects or children of them,
 			--    Or something similar. Not whatever this is.
+			self.frozen = not self.scene.candleManager:isShown()
 			self.scene.candleManager:toggleShown()
-			self.frozen = self.scene.candleManager:isShown()
 		end
 	elseif obj.layer == "doors" then
 		--HASAN: Change the the volume and pitch to whatever sounds good.

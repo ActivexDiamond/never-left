@@ -51,7 +51,6 @@ function Bookshelf:_attemptCombine()
 	local i2 = TMP.highlightedSlot.item
 	TMP.mouseSlot.item = i2
 	TMP.highlightedSlot.item = i1
-	
 end
 
 function Bookshelf:_checkSolution()

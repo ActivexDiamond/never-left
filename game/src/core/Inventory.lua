@@ -144,6 +144,21 @@ end
 function Inventory:_attemptCombine()
 	print("Combined: ", TMP.mouseItem.ID, TMP.highlightedSlot.item.ID)
 	
+	if (TMP.mouseItem.ID == "chalk_floor" and TMP.highlightedSlot.item.ID == "missing_page") or
+			(TMP.mouseItem.ID == "missing_page" and TMP.highlightedSlot.item.ID == "chalk_floor") then
+	TMP.mouseSlot.item = nil
+	TMP.highlightedSlot.item = nil
+
+	CHALK_DONE = true
+
+	GAME:getCurrentState().player:_showItemMenu({
+		dialogue = [[> I think if I copy the symbol on this page...
+> Onto the floor... Something might happen.
+]]
+	})
+	return
+	end
+
 	GAME:getCurrentState().player:_showItemMenu({
 		dialogue = "> These two don't go together..."
 	}, true)
@@ -225,10 +240,13 @@ function Inventory:setPosition(x, y)
 
 	x = x or self.x
 	y = y or self.y
+	local i = 0
 	for slotX = 1, self.slotCols do
 		for slotY = 1, self.slotRows do
 			y = y - (self.slotVisualSize + self.slotVisualPadding)
+			i = i + 1
 			table.insert(self.slots, {
+				index = i,
 				x = x,
 				y = y,
 				w = self.slotVisualSize,

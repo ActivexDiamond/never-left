@@ -47,7 +47,7 @@ return {
       id = 2,
       name = "walls",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -1302,20 +1302,6 @@ return {
           properties = {}
         },
         {
-          id = 109,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 90.75,
-          y = 83.5,
-          width = 9.375,
-          height = 21.25,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 113,
           name = "",
           type = "",
@@ -1931,22 +1917,6 @@ return {
           visible = true,
           properties = {
             ["typ"] = "ritualroomcarpet"
-          }
-        },
-        {
-          id = 183,
-          name = "pushable_counter",
-          type = "",
-          shape = "point",
-          x = 93.5625,
-          y = 83.8125,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {
-            ["typ"] = "pushablecounter"
           }
         },
         {

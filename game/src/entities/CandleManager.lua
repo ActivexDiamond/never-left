@@ -43,6 +43,7 @@ function CandleManager:initialize(scene, obj)
 
 		self.candles[i] = candle
 		self.litCandles[i] = litCandle
+		self.candleTracker = {false, false, false, false}
 
 		self:addItem(candle)
 	end
@@ -67,12 +68,22 @@ end
 --============================ Internals ==============================
 
 function CandleManager:_attemptCombine()
-	PLAY_SOUND(AUDIO.SFX.match_use)
-	local i1 = TMP.mouseSlot.item
-	local i2 = TMP.highlightedSlot.item
-	TMP.mouseSlot.item = i2
-	TMP.highlightedSlot.item = i1
-	
+	if TMP.mouseItem.ID == "matches" then
+		PLAY_SOUND(AUDIO.SFX.match_use)
+		local i = TMP.highlightedSlot.index
+		print(i)
+		self.candleTracker[i] = not self.candleTracker[i]
+		if self.candleTracker[i] then
+			TMP.highlightedSlot.item = self.litCandles[i]
+		else
+			TMP.highlightedSlot.item = self.candles[i]
+		end
+		return
+	end
+
+	GAME:getCurrentState().player:_showItemMenu({
+		dialogue = "> I can't use this here..."
+	}, true)
 end
 
 function CandleManager:_checkSolution()
@@ -83,13 +94,18 @@ function CandleManager:_checkSolution()
 	end
 	if not DEBUG.DEV_MODE and itemCount < #self.slots then return false end
 
---	if DEBUG.DEV_MODE or (self.slots[1].item.ID == "candle_1_lit" and
-	if (self.slots[1].item.ID == "candle_1_lit" and
+	if DEBUG.DEV_MODE or (self.slots[1].item.ID == "candle_1_lit" and
 			self.slots[2].item.ID == "candle_2_lit" and
 			self.slots[3].item.ID == "candle_3" and
 			self.slots[4].item.ID == "candle_4_lit") then
 		
-		PLAY_SOUND(AUDIO.SFX.wood_break)
+		PLAY_SOUND(AUDIO.SFX.wood_break, 4)
+
+
+		GAME:getCurrentState().player:_showItemMenu({
+			dialogue = "> I think I just heard a door breaking...",
+		})
+		GAME:getCurrentState().map.objs.doors.basement.opened = true
 
 		self.scene.player.inv:removeItemById("matches")
 		self.scene.map.bumpWorld:remove(self.tiledObject)

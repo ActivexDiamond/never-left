@@ -9,7 +9,7 @@
 1
 </data>
  </layer>
- <objectgroup id="2" name="walls" visible="0" locked="1">
+ <objectgroup id="2" name="walls" locked="1">
   <object id="3" x="82.0856" y="41.5495" width="5.06701" height="126.169"/>
   <object id="4" x="87.1526" y="160.371" width="17.2278" height="7.34717"/>
   <object id="5" x="104.38" y="160.371" width="2.0268" height="3.04021"/>
@@ -99,7 +99,6 @@
   <object id="106" x="156.625" y="47.125" width="14.5" height="13.875"/>
   <object id="107" x="114.125" y="46.75" width="40.375" height="46"/>
   <object id="108" x="97.375" y="44" width="14.25" height="16.875"/>
-  <object id="109" x="90.75" y="83.5" width="9.375" height="21.25"/>
   <object id="113" x="122.875" y="111.125" width="18.875" height="5.875"/>
   <object id="114" x="140.5" y="114.25" width="6" height="7.125"/>
   <object id="115" x="90.875" y="114.25" width="55.625" height="7.125"/>
@@ -246,12 +245,6 @@
    <properties>
     <property name="typ" value="ritualroomcarpet"/>
    </properties>
-  </object>
-  <object id="183" name="pushable_counter" x="93.5625" y="83.8125">
-   <properties>
-    <property name="typ" value="pushablecounter"/>
-   </properties>
-   <point/>
   </object>
   <object id="182" name="symbol_sorter_bookshelf" x="169.091" y="148.182" width="5.45455" height="7.81818">
    <properties>

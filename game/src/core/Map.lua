@@ -97,12 +97,17 @@ end
 
 function Map:update(dt)
 	WorldObject.update(self, dt)
+	if CHALK_DONE then
+		self.ID = "map_chalked"
+	end
 end
 
 function Map:draw(g2d)
 --	WorldObject.draw(self, g2d)
 	self.w = 400 self.h = 260
 	local spr, sx, sy = AssetRegistry:getSprObj(self)
+	for k, v in pairs(self) do print(k, v) end
+
 	local b = 1
 	g2d.setColor(b, b, b, 1)
 	g2d.draw(spr, self.pos.x, self.pos.y, 0, self.ZOOM, self.ZOOM)

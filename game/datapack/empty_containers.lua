@@ -147,8 +147,8 @@ data{"bookshelf",
 }
  --- this won't show 
 
-data{"pushablecounter",
-	dialogue = [[> SEARCH.
+data{"counter",
+	dialogue = [[> A kitchen counter. The drawers are all empty.
 ]],
 }
  --- this won't show 

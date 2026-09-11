@@ -92,6 +92,19 @@ InGameScene[EvMousePresss] = function(self, e)
 	local mx, my = push:toGame(e.x ,e.y)
 
 	--FIXME: Manual overrides for `candle_desk`.
+	if TMP.highlightedSlot and TMP.highlightedSlot.inventory.ID == "candle_manager_inventory" then
+	--Holding an item and clicked on a slot with an item.
+	if TMP.mouseItem and TMP.highlightedSlot and TMP.highlightedSlot.item then
+		TMP.highlightedSlot.inventory:_attemptCombine()
+		TMP.mouseSlot.selected = false
+		TMP.mouseSlot.color = TMP.mouseSlot.colors.DEFAULT
+		TMP.mouseItem = nil
+		TMP.mouseSlot = nil
+		return
+	end
+		return
+	end
+
 	--Not holding item and clicked on a slot.
 	if not TMP.mouseItem and TMP.highlightedSlot then
 		--Only select it and pick up, if it is non-empty.
