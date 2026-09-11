@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="400" tileheight="260" infinite="0" nextlayerid="11" nextobjectid="197">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="400" tileheight="260" infinite="0" nextlayerid="12" nextobjectid="197">
  <editorsettings>
   <export target="main.lua" format="lua"/>
  </editorsettings>
@@ -132,11 +132,6 @@
     <property name="typ" value="eggs"/>
    </properties>
   </object>
-  <object id="137" name="polaroid" x="216.063" y="85.625" width="7.25" height="7.25">
-   <properties>
-    <property name="typ" value="polaroid"/>
-   </properties>
-  </object>
   <object id="140" x="183.813" y="46.625" width="17.9375" height="16.5">
    <properties>
     <property name="typ" value="studyroomdrawr"/>
@@ -169,7 +164,7 @@
   </object>
   <object id="149" x="239.625" y="104.5" width="10.5" height="8.75">
    <properties>
-    <property name="missingpapages" value=""/>
+    <property name="typ" value="ropes"/>
    </properties>
   </object>
   <object id="150" x="209.875" y="133.125" width="42" height="16.5">
@@ -177,7 +172,11 @@
     <property name="typ" value="sofa"/>
    </properties>
   </object>
-  <object id="151" x="184.25" y="99.25" width="14.125" height="13.125"/>
+  <object id="151" x="184.25" y="99.25" width="14.125" height="13.125">
+   <properties>
+    <property name="typ" value="printer"/>
+   </properties>
+  </object>
   <object id="157" x="156.25" y="48.3125" width="14.5625" height="12.6875">
    <properties>
     <property name="typ" value="nightstand"/>
@@ -230,23 +229,13 @@
     <property name="typ" value="bed"/>
    </properties>
   </object>
-  <object id="176" name="evil_dead_book" x="83" y="177.375" width="4.25" height="4.625">
-   <properties>
-    <property name="typ" value="evildeadbook"/>
-   </properties>
-  </object>
   <object id="177" x="241.875" y="161.625" width="16.25" height="30.5">
    <properties>
     <property name="typ" value="diningtable"/>
    </properties>
   </object>
-  <object id="179" name="dg_missing_page" x="210.364" y="55.0909" width="8.72727" height="14.3636">
-   <properties>
-    <property name="typ" value="bookmissingpages"/>
-   </properties>
-  </object>
  </objectgroup>
- <objectgroup id="10" name="pickables">
+ <objectgroup id="10" name="pickables" visible="0">
   <object id="193" name="bathroom_key" x="179.273" y="186.182" width="7.18182" height="6.09091">
    <properties>
     <property name="typ" value="bathroomkey"/>
@@ -259,8 +248,26 @@
   </object>
   <object id="178" name="chalk_floor" x="76.4545" y="204.875" width="7.45455" height="6.80682"/>
  </objectgroup>
- <objectgroup id="4" name="doors">
-  <object id="122" name="study" x="85.5" y="9.7045" width="1.72727" height="15"/>
+ <objectgroup id="11" name="puzzles">
+  <object id="190" name="ritual_carpet" x="100.125" y="185.375" width="15.875" height="13">
+   <properties>
+    <property name="typ" value="ritualroomcarpet"/>
+   </properties>
+  </object>
+  <object id="183" name="pushable_counter" x="93.5625" y="83.8125">
+   <properties>
+    <property name="typ" value="pushablecounter"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="182" name="symbol_sorter_bookshelf" x="169.091" y="148.182" width="5.45455" height="7.81818">
+   <properties>
+    <property name="typ" value="bookshelf"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="doors" visible="0">
+  <object id="122" name="study" x="179.5" y="79.7045" width="1.72727" height="15"/>
   <object id="123" name="bedroom" x="148.545" y="118.091" width="19.2727" height="1.81818">
    <properties>
     <property name="typ" value="bedroomdoor"/>
@@ -292,37 +299,20 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="5" name="dialogues"/>
- <objectgroup id="6" name="pz_symbol_sorter">
-  <object id="182" name="target" x="169.091" y="148.182" width="5.45455" height="7.81818">
+ <objectgroup id="5" name="dialogues" visible="0">
+  <object id="137" name="polaroid" x="216.063" y="85.625" width="7.25" height="7.25">
    <properties>
-    <property name="typ" value="bookshelf"/>
+    <property name="typ" value="polaroid"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup id="7" name="pz_push">
-  <object id="183" name="pushable_counter" x="93.5625" y="83.8125">
+  <object id="179" name="dg_missing_page" x="210.364" y="55.0909" width="8.72727" height="14.3636">
    <properties>
-    <property name="typ" value="pushablecounter"/>
+    <property name="typ" value="bookmissingpages"/>
    </properties>
-   <point/>
   </object>
- </objectgroup>
- <objectgroup id="8" name="pz_candles">
-  <object id="187" name="candle_1" x="187.75" y="48.5">
-   <point/>
-  </object>
-  <object id="188" name="candle_2" x="192.75" y="53.5">
-   <point/>
-  </object>
-  <object id="189" name="candle_3" x="198.375" y="48">
-   <point/>
-  </object>
- </objectgroup>
- <objectgroup id="9" name="pz_ritual">
-  <object id="190" name="target" x="100.125" y="185.375" width="15.875" height="13">
+  <object id="176" name="evil_dead_book" x="83" y="177.375" width="4.25" height="4.625">
    <properties>
-    <property name="typ" value="ritualroomcarpet"/>
+    <property name="typ" value="evildeadbook"/>
    </properties>
   </object>
  </objectgroup>

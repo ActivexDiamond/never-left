@@ -55,6 +55,16 @@ data{"studyroomcabnet",
 ]],
 }
 
+data{"printer",
+	dialogue = [[> SEARCH.
+]],
+}
+
+data{"ropes",
+	dialogue = [[> SEARCH.
+]],
+}
+
 data{"book",
 	dialogue = [[> SEARCH.
 ]],

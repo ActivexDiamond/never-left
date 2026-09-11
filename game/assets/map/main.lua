@@ -9,7 +9,7 @@ return {
   height = 1,
   tilewidth = 400,
   tileheight = 260,
-  nextlayerid = 11,
+  nextlayerid = 12,
   nextobjectid = 197,
   properties = {},
   tilesets = {
@@ -1590,22 +1590,6 @@ return {
           }
         },
         {
-          id = 137,
-          name = "polaroid",
-          type = "",
-          shape = "rectangle",
-          x = 216.063,
-          y = 85.625,
-          width = 7.25,
-          height = 7.25,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {
-            ["typ"] = "polaroid"
-          }
-        },
-        {
           id = 140,
           name = "",
           type = "",
@@ -1714,7 +1698,7 @@ return {
           opacity = 1,
           visible = true,
           properties = {
-            ["missingpapages"] = ""
+            ["typ"] = "ropes"
           }
         },
         {
@@ -1745,7 +1729,9 @@ return {
           rotation = 0,
           opacity = 1,
           visible = true,
-          properties = {}
+          properties = {
+            ["typ"] = "printer"
+          }
         },
         {
           id = 157,
@@ -1936,22 +1922,6 @@ return {
           }
         },
         {
-          id = 176,
-          name = "evil_dead_book",
-          type = "",
-          shape = "rectangle",
-          x = 83,
-          y = 177.375,
-          width = 4.25,
-          height = 4.625,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {
-            ["typ"] = "evildeadbook"
-          }
-        },
-        {
           id = 177,
           name = "",
           type = "",
@@ -1966,22 +1936,6 @@ return {
           properties = {
             ["typ"] = "diningtable"
           }
-        },
-        {
-          id = 179,
-          name = "dg_missing_page",
-          type = "",
-          shape = "rectangle",
-          x = 210.364,
-          y = 55.0909,
-          width = 8.72727,
-          height = 14.3636,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {
-            ["typ"] = "bookmissingpages"
-          }
         }
       }
     },
@@ -1991,7 +1945,7 @@ return {
       id = 10,
       name = "pickables",
       class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -2050,10 +2004,74 @@ return {
     {
       type = "objectgroup",
       draworder = "topdown",
+      id = 11,
+      name = "puzzles",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 190,
+          name = "ritual_carpet",
+          type = "",
+          shape = "rectangle",
+          x = 100.125,
+          y = 185.375,
+          width = 15.875,
+          height = 13,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["typ"] = "ritualroomcarpet"
+          }
+        },
+        {
+          id = 183,
+          name = "pushable_counter",
+          type = "",
+          shape = "point",
+          x = 93.5625,
+          y = 83.8125,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["typ"] = "pushablecounter"
+          }
+        },
+        {
+          id = 182,
+          name = "symbol_sorter_bookshelf",
+          type = "",
+          shape = "rectangle",
+          x = 169.091,
+          y = 148.182,
+          width = 5.45455,
+          height = 7.81818,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["typ"] = "bookshelf"
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
       id = 4,
       name = "doors",
       class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -2066,8 +2084,8 @@ return {
           name = "study",
           type = "",
           shape = "rectangle",
-          x = 85.5,
-          y = 9.7045,
+          x = 179.5,
+          y = 79.7045,
           width = 1.72727,
           height = 15,
           rotation = 0,
@@ -2179,22 +2197,7 @@ return {
       id = 5,
       name = "dialogues",
       class = "",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      parallaxx = 1,
-      parallaxy = 1,
-      properties = {},
-      objects = {}
-    },
-    {
-      type = "objectgroup",
-      draworder = "topdown",
-      id = 6,
-      name = "pz_symbol_sorter",
-      class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -2203,141 +2206,51 @@ return {
       properties = {},
       objects = {
         {
-          id = 182,
-          name = "target",
+          id = 137,
+          name = "polaroid",
           type = "",
           shape = "rectangle",
-          x = 169.091,
-          y = 148.182,
-          width = 5.45455,
-          height = 7.81818,
+          x = 216.063,
+          y = 85.625,
+          width = 7.25,
+          height = 7.25,
           rotation = 0,
           opacity = 1,
           visible = true,
           properties = {
-            ["typ"] = "bookshelf"
+            ["typ"] = "polaroid"
           }
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      draworder = "topdown",
-      id = 7,
-      name = "pz_push",
-      class = "",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      parallaxx = 1,
-      parallaxy = 1,
-      properties = {},
-      objects = {
-        {
-          id = 183,
-          name = "pushable_counter",
-          type = "",
-          shape = "point",
-          x = 93.5625,
-          y = 83.8125,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {
-            ["typ"] = "pushablecounter"
-          }
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      draworder = "topdown",
-      id = 8,
-      name = "pz_candles",
-      class = "",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      parallaxx = 1,
-      parallaxy = 1,
-      properties = {},
-      objects = {
-        {
-          id = 187,
-          name = "candle_1",
-          type = "",
-          shape = "point",
-          x = 187.75,
-          y = 48.5,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
         },
         {
-          id = 188,
-          name = "candle_2",
-          type = "",
-          shape = "point",
-          x = 192.75,
-          y = 53.5,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 189,
-          name = "candle_3",
-          type = "",
-          shape = "point",
-          x = 198.375,
-          y = 48,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {}
-        }
-      }
-    },
-    {
-      type = "objectgroup",
-      draworder = "topdown",
-      id = 9,
-      name = "pz_ritual",
-      class = "",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      parallaxx = 1,
-      parallaxy = 1,
-      properties = {},
-      objects = {
-        {
-          id = 190,
-          name = "target",
+          id = 179,
+          name = "dg_missing_page",
           type = "",
           shape = "rectangle",
-          x = 100.125,
-          y = 185.375,
-          width = 15.875,
-          height = 13,
+          x = 210.364,
+          y = 55.0909,
+          width = 8.72727,
+          height = 14.3636,
           rotation = 0,
           opacity = 1,
           visible = true,
           properties = {
-            ["typ"] = "ritualroomcarpet"
+            ["typ"] = "bookmissingpages"
+          }
+        },
+        {
+          id = 176,
+          name = "evil_dead_book",
+          type = "",
+          shape = "rectangle",
+          x = 83,
+          y = 177.375,
+          width = 4.25,
+          height = 4.625,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["typ"] = "evildeadbook"
           }
         }
       }
