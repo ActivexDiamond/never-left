@@ -101,7 +101,7 @@ InGameScene[EvMousePresss] = function(self, e)
 		end
 		return
 	end					
-	print(TMP.mouseSlot, TMP.highlightedSlot)
+
 	--Holding an item, and clicked on an empty slot.
 	if TMP.mouseItem and TMP.highlightedSlot and not TMP.highlightedSlot.item then
 		TMP.highlightedSlot.item = TMP.mouseItem
@@ -129,7 +129,8 @@ InGameScene[EvMousePresss] = function(self, e)
 	if TMP.mouseItem then
 		local worldX = mx - self.cameraX
 		local worldY = my - self.cameraY
-		local obj = self.map.bumpWorld:queryPoint(worldX, worldY, mouseInteractFilter)[1]
+		local filter = TMP.mouseSlot.inventory.mouseInteractFilter
+		local obj = self.map.bumpWorld:queryPoint(worldX, worldY, filter)[1]
 		if obj then
 			self.player.inv:_attemptUse(obj)
 		end

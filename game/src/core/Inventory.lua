@@ -148,13 +148,36 @@ end
 
 function Inventory:_attemptUse(obj)
 	print("Used on: ", obj.ID)
+
+	if obj.layer and obj.layer == "doors" then
+		if obj.keyItem == TMP.mouseItem.ID then
+			PLAY_SOUND(AUDIO.SFX.crowbar_use)
+			obj.opened = true
+			self.parent.scene.map.bumpWorld:remove(obj)
+			
+			TMP.mouseSlot.item = nil
+			TMP.mouseSlot.selected = false
+			TMP.mouseSlot = nil
+			TMP.mouseItem = nil
+		end
+	end
 end
 
 --============================ Callbacks ==============================
 
-local function mouseInteractFilter(item)
-	if item.layer == "walls" then
-		return false
+function Inventory.mouseInteractFilter(item)
+
+	if item.layer then
+		if item.layer == "walls" then
+			return false
+		end
+	end
+
+	if item.ID then
+		if item.ID == "player_interact_box" or
+				item.ID == "player" then
+			return false
+		end
 	end
 
 	return true

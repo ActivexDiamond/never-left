@@ -55,9 +55,16 @@ function Bookshelf:_attemptCombine()
 end
 
 function Bookshelf:_checkSolution()
-	if self.slots[1].item.ID == "symbol_1" and
+	--Only run the check if all slots are full.
+	local itemCount = 0
+	for k, v in ipairs(self.slots) do 
+		if v.item then itemCount = itemCount + 1 end
+	end
+	if not DEBUG.DEV_MODE and itemCount < 3 then return false end
+
+	if DEBUG.DEV_MODE or (self.slots[1].item.ID == "symbol_1" and
 			self.slots[2].item.ID == "symbol_2" and
-			self.slots[3].item.ID == "symbol_3" then
+			self.slots[3].item.ID == "symbol_3") then
 		PLAY_SOUND(AUDIO.SFX.crowbar_pickup)
 		local crowbar = {ID = "crowbar"}
 		DataRegistry:applyStats(crowbar)
@@ -65,9 +72,9 @@ function Bookshelf:_checkSolution()
 
 		self.scene.player.inv:addItem(crowbar)
 
-
-
+		self.scene.map.bumpWorld:remove(self.tiledObject)
 		self.scene:removeObject(self)
+		return true
 	end
 end
 

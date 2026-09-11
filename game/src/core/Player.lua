@@ -118,13 +118,7 @@ function Player:update(dt)
 		--HASAN: I think this plays way too often.
 		self.walkStepCooldown = self.walkStepCooldown - dt
 		if self.walkStepCooldown <= 0 then
-			local walkSfx = AUDIO and AUDIO.SFX and (
-				AUDIO.SFX.walkingg 
-				 
-			)
-			if walkSfx then
-				PLAY_SOUND(walkSfx, 0.35, 8, 0.7)
-			end
+			PLAY_SOUND(AUDIO.SFX.walkingg, 0.35, 8, 0.7)
 			self.walkStepCooldown = 0.28
 		end
 	else
@@ -276,7 +270,7 @@ function Player:_onInteractInput()
 		local sound = obj.typ and AUDIO.SEARCH_SOUNDS[obj.typ]
 		if sound then
 			--HASAN: Change the the volume and pitch to whatever sounds good.
-			PLAY_SOUND(sound, 0.35, 8)
+			PLAY_SOUND(sound, 1)
 		end
 		if not obj.collected and obj.ID:sub(1, 8) ~= "empty_co" then
 			print("Picked up", obj)
