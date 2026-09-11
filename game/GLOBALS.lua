@@ -12,10 +12,17 @@ DEBUG = {
 	DRAW_INTERACT_BOX = false,
 }
 
-TMP = {}
+TMP = {
+		
+}
  
 AUDIO = {
 	SEARCH_SOUNDS = {
+
+			opendoor = love.audio.newSource("assets/sfx/opendoor.mp3", "static"),
+			plant = love.audio.newSource("assets/sfx/plant.mp3", "static"),
+			drawer = love.audio.newSource("assets/sfx/drawer.mp3", "static"),
+
 		--HASAN: Fill this
 --		basementdoor = love.audio.newSource("assets/sfx/basementdoor.mp3", "static"),
 	},
@@ -75,6 +82,7 @@ AUDIO = {
 		match_use = love.audio.newSource("assets/sfx/match_use.mp3", "static"),
 		wood_break = love.audio.newSource("assets/sfx/wood_break.mp3", "static"),
 	},
+
 }
 
 ---Play a sound, optionally with some variance. Pauses previous instances, if any.
