@@ -53,13 +53,6 @@
   <object id="45" x="157.063" y="196.25" width="5.4375" height="2.5625"/>
   <object id="47" x="177.375" y="189.375" width="7.125" height="8.25"/>
   <object id="48" x="242.625" y="161.5" width="15" height="31.125"/>
-  <object id="49" x="256.375" y="179.75" width="4.875" height="7.375"/>
-  <object id="50" x="256" y="167.5" width="5.5" height="5.75"/>
-  <object id="53" x="261.375" y="180.125" width="0.75" height="5.375"/>
-  <object id="54" x="238" y="180" width="5" height="6.75"/>
-  <object id="55" x="238.625" y="166.75" width="6.75" height="6.75"/>
-  <object id="56" x="246.25" y="155.5" width="7.25" height="5.875"/>
-  <object id="57" x="245.625" y="192.25" width="8.125" height="5.75"/>
   <object id="58" x="266.5" y="198" width="10.75" height="10.5"/>
   <object id="59" x="278.125" y="198.125" width="24.125" height="15.75"/>
   <object id="60" x="288.75" y="166.25" width="13.5" height="31.875"/>
@@ -116,7 +109,7 @@
   <object id="119" x="211.5" y="200.75" width="13.75" height="10.5"/>
   <object id="194" x="328.545" y="100.364" width="74.5455" height="16.1818"/>
  </objectgroup>
- <objectgroup id="3" name="searchables">
+ <objectgroup id="3" name="searchables" visible="0">
   <object id="131" x="288.182" y="174.068" width="14.4545" height="8.1023">
    <properties>
     <property name="typ" value="counter"/>
@@ -248,7 +241,7 @@
   </object>
   <object id="178" name="chalk_floor" x="76.4545" y="204.875" width="7.45455" height="6.80682"/>
  </objectgroup>
- <objectgroup id="11" name="puzzles">
+ <objectgroup id="11" name="puzzles" visible="0">
   <object id="190" name="ritual_carpet" x="100.125" y="185.375" width="15.875" height="13">
    <properties>
     <property name="typ" value="ritualroomcarpet"/>

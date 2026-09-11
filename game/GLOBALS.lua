@@ -72,6 +72,7 @@ AUDIO = {
 		paperrustle = love.audio.newSource("assets/sfx/paperrustle.mp3", "static"),
 
 		crowbar_pickup = love.audio.newSource("assets/sfx/crowbar_pickup.mp3", "static"),
+		crowbar_use = love.audio.newSource("assets/sfx/crowbar_use.mp3", "static"),
 	},
 }
 
