@@ -40,8 +40,17 @@ end
 
 --============================ API ==============================
 
-
 --============================ Internals ==============================
+
+function Bookshelf:_attemptCombine()
+	PLAY_SOUND(dw
+	local i1 = TMP.mouseSlot.item
+	local i2 = TMP.highlightedSlot.item
+	TMP.mouseSlot.item = i2
+	TMP.highlightedSlot.item = i1
+	
+end
+
 
 --============================ Getters / Setters ==============================
 

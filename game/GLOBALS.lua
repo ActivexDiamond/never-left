@@ -67,6 +67,8 @@ AUDIO = {
 		staticnoise = love.audio.newSource("assets/sfx/staticnoise.mp3", "static"),
 
 		swoshhorror = love.audio.newSource("assets/sfx/swoshhorror.mp3", "static"),
+		
+		paperrustle = love.audio.newSource("assets/sfx/paperrustle.mp3", "static"),
 
 	},
 }
