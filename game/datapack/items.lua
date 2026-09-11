@@ -72,7 +72,8 @@ data{"study_key",
 data{"evil_dead_book",
 	w = 8,
 	h = 8,
-	dialogue=[[> The ritual was never meant to break the curse, it was meant to preserve it.
+--	dialogue=[[> The ritual was never meant to break the curse, it was meant to preserve it.
+	dialogue=[[> You need to do all the steps to unlock the door and leave. Follow them carefully.
 ]],
 }
 
