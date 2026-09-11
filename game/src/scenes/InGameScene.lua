@@ -3,10 +3,12 @@ local ItemManager = require "core.ItemManager"
 
 local Scene = require "cat-paw-mods.Scene"
 local EvKeyPress = require "cat-paw.core.patterns.event.keyboard.EvKeyPress"
+local EvMousePresss = require "cat-paw.core.patterns.event.mouse.EvMousePress"
 
 local Map = require "core.Map"
 local Player = require "core.Player"
 
+local push = require "libs.push"
 local shack = require "libs.shack"
 
 --============================ Helper Methods ==============================
@@ -84,6 +86,57 @@ end
 --============================ API ==============================
 
 --============================ Callbacks ==============================
+
+InGameScene[EvMousePresss] = function(self, e)
+	local mx, my = push:toGame(e.x ,e.y)
+
+	--Not holding item and clicked on a slot.
+	if not TMP.mouseItem and TMP.highlightedSlot then
+		--Only select it and pick up, if it is non-empty.
+		if TMP.highlightedSlot.item then
+			TMP.highlightedSlot.selected = true
+			TMP.mouseItem = TMP.highlightedSlot.item
+			TMP.mouseSlot = TMP.highlightedSlot
+			TMP.highlightedSlot.color = TMP.highlightedSlot.colors.SELECTED
+		end
+		return
+	end					
+	print(TMP.mouseSlot, TMP.highlightedSlot)
+	--Holding an item, and clicked on an empty slot.
+	if TMP.mouseItem and TMP.highlightedSlot and not TMP.highlightedSlot.item then
+		TMP.highlightedSlot.item = TMP.mouseItem
+		TMP.mouseSlot.item = nil
+
+		TMP.mouseSlot.selected = false
+		TMP.mouseSlot.color = TMP.mouseSlot.colors.DEFAULT
+		TMP.mouseItem = nil
+		TMP.mouseSlot = nil
+		return
+	end
+	
+	--Holding an item and clicked on a slot with an item.
+	if TMP.mouseItem and TMP.highlightedSlot and TMP.highlightedSlot.item then
+		self.player.inv:_attemptCombine()
+		TMP.mouseSlot.selected = false
+		TMP.mouseSlot.color = TMP.mouseSlot.colors.DEFAULT
+		TMP.mouseItem = nil
+		TMP.mouseSlot = nil
+		return
+	end
+	
+	--Holding an item, and click in-world.
+	--TODO: RANGE CHECK
+	if TMP.mouseItem then
+		local worldX = mx - self.cameraX
+		local worldY = my - self.cameraY
+		local obj = self.map.bumpWorld:queryPoint(worldX, worldY, mouseInteractFilter)[1]
+		if obj then
+			self.player.inv:_attemptUse(obj)
+		end
+		return
+	end
+end
+
 InGameScene[EvKeyPress] = function(self, e)
 	if e.key == 'space' then
 	end
