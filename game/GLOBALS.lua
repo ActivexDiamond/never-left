@@ -15,14 +15,16 @@ DEBUG = {
 }
 
 TMP = {
-			opendoor = love.audio.newSource("assets/sfx/opendoor.mp3", "static"),
-			plant = love.audio.newSource("assets/sfx/plant.mp3", "static"),
-			drawer = love.audio.newSource("assets/sfx/drawer.mp3", "static"),
-
+		
 }
  
 AUDIO = {
 	SEARCH_SOUNDS = {
+
+			opendoor = love.audio.newSource("assets/sfx/opendoor.mp3", "static"),
+			plant = love.audio.newSource("assets/sfx/plant.mp3", "static"),
+			drawer = love.audio.newSource("assets/sfx/drawer.mp3", "static"),
+
 		--HASAN: Fill this
 --		basementdoor = love.audio.newSource("assets/sfx/basementdoor.mp3", "static"),
 	},
