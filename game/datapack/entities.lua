@@ -2,6 +2,7 @@ data{"player",
 	w = 8,
 	h = 8,
 	
+	DIALOGUE_FADE_DURATION = 1,
 	SPEED = 50,
 	lightRadius = 15,
 	lightFps = 3,
@@ -31,5 +32,8 @@ data{"player_inventory",
 	slotCount = 9,
 	slotVisualSize = 9,
 	slotVisualPadding = 2,
-	slotColor = 0.3,
+	slotColor = {0.3, 0.3, 0.3, 1},
+	selectedSlotColor = {0.3, 0, 0, 1},
+	highlightedSlotColor = {0.6, 0.6, 0.6, 1},
+
 }

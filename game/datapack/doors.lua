@@ -1,5 +1,10 @@
+data{"initial",
+	dialogue = [[> I want to leave...
+]]
+}
+
+
 data{"outside",
-	keyItem = nil,
 	dialogue = [[> The door is locked.
 > A note is carved into it:
 "Everything has its place, We all follow an order."
@@ -28,7 +33,6 @@ data{"study",
 }
 
 data{"basement",
-	keyItem = nil,
 	dialogue = "> This door is completely sealed shut. There doesn't seem to be any way to open it.",
 }
 

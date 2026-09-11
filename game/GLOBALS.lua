@@ -10,8 +10,8 @@ DEBUG = {
 	MUTE_AUDIO = true,
 
 	DRAW_BOUNDING_BOXES = false,
-	DRAW_INTERACT_BOX = true,
-	
+	DRAW_INTERACT_BOX = false,
+	NOCLIP_DOORS = true,
 }
 
  
@@ -116,6 +116,8 @@ if os == "Web" or os == "Android" then
 	DEBUG.MUTE_AUDIO = false
 	DEBUG.INITIAL_SCENE = nil
 	DEBUG.DRAW_INTERACT_BOX = false
+	DEBUG.DRAW_BOUNDING_BOXES = false
+	DEBUG.NOCLIP_DOORS = false
 end
 if os == "Android" then
 end

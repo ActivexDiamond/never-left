@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="400" tileheight="260" infinite="0" nextlayerid="11" nextobjectid="195">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="400" tileheight="260" infinite="0" nextlayerid="11" nextobjectid="197">
  <editorsettings>
   <export target="main.lua" format="lua"/>
  </editorsettings>
@@ -284,6 +284,11 @@
   <object id="127" name="outside" x="331.125" y="117.125" width="5" height="33.875">
    <properties>
     <property name="typ" value="outsidedoor"/>
+   </properties>
+  </object>
+  <object id="196" name="initial" x="296.227" y="130.801" width="1.72727" height="21.8409">
+   <properties>
+    <property name="typ" value="initialdoor"/>
    </properties>
   </object>
  </objectgroup>

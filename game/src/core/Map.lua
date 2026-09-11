@@ -40,6 +40,7 @@ function Map:initialize(scene)
 			--Load custom properties
 			for k, v in pairs(tiledObj.properties or {}) do
 				obj[k] = v
+--				print(k, v)
 			end
 
 			--Highlight / sparkle
@@ -127,6 +128,11 @@ Map[EvKeyPress] = function(self, e)
 end
 
 --============================ Getters / Setters ==============================
+
+function Map:getSpawnPoint()
+	--FIXME: Hardcoded. Should be defined in Tiled.
+	return 312, 131
+end
 
 function Map:getCenterPoint()
 	local spr, sx, sy = AssetRegistry:getSprObj(self)

@@ -10,7 +10,7 @@ return {
   tilewidth = 400,
   tileheight = 260,
   nextlayerid = 11,
-  nextobjectid = 195,
+  nextobjectid = 197,
   properties = {},
   tilesets = {
     {
@@ -2153,6 +2153,22 @@ return {
           visible = true,
           properties = {
             ["typ"] = "outsidedoor"
+          }
+        },
+        {
+          id = 196,
+          name = "initial",
+          type = "",
+          shape = "rectangle",
+          x = 296.227,
+          y = 130.801,
+          width = 1.72727,
+          height = 21.8409,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["typ"] = "initialdoor"
           }
         }
       }

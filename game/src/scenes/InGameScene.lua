@@ -22,7 +22,7 @@ function InGameScene:initialize()
 	self.map = Map(self)
 	self:addObject(self.map)
 
-	self.player = Player(self, self.map:getCenterPoint())
+	self.player = Player(self, self.map:getSpawnPoint())
 	self:addObject(self.player)
 --	self:addObject(ItemManager(self))
 

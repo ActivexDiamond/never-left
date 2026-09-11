@@ -6,6 +6,7 @@ local EvKeyPress = require "cat-paw.core.patterns.event.keyboard.EvKeyPress"
 local WorldObject = require "core.WorldObject"
 local AssetRegistry = require "core.AssetRegistry"
 local DataRegistry = require "core.DataRegistry"
+local uMath = require "cat-paw.core.utilities.uMath"
 
 local Inventory = require "core.Inventory"
 
@@ -39,6 +40,7 @@ vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords)
 
 ---@class Player : WorldObject
 ---@field SPEED number
+---@field DIALOGUE_FADE_DURATION number
 ---@field lightRadius number
 ---@field lightFps number
 ---@overload fun(scene: Scene, x: number, y: number): self
@@ -54,7 +56,12 @@ function Player:initialize(scene, x, y)
 
 	self.inv = Inventory("player_inventory", self)
 	
-	self.itemMenu = {visible = false}
+	self.itemMenu = {
+		visible = false, 
+		progress = 0,
+		maxProgress = self.DIALOGUE_FADE_DURATION,
+	}
+
 	self.dialogueBoxSprite = love.graphics.newImage("assets/spr/obj/dialogue_box.png")
 
 	GAME:getScheduler():callEvery(1 / self.lightFps, function(dt, per, self)
@@ -67,6 +74,7 @@ function Player:initialize(scene, x, y)
 	self:setSpriteOffset(WorldObject.SPRITE_CENTER)
 	self.scene.map.bumpWorld:add(self, self:getBoundingBox())
 
+	self.rotation = math.pi / 2
 	self.scratchRotationVector = brinevector(0, 0)
 	self.walkStepCooldown = 0
 
@@ -133,6 +141,14 @@ function Player:update(dt)
 	self.interactBox.pos.x = newX
 	self.interactBox.pos.y = newY
 	self.interactBox:update(dt)
+
+	self.inv:update(dt)
+	
+	local m = self.itemMenu
+	m.progress = m.progress + dt
+	if m.progress > m.maxProgress then
+		m.progress = m.maxProgress
+	end
 end
 
 function Player:earlyDraw(g2d)
@@ -175,12 +191,13 @@ function Player:draw(g2d)
 
 	local m = self.itemMenu
 	if m.visible then	
+		local pro = m.progress / m.maxProgress
 		g2d.push('all')
 			g2d.setStencilTest()
 			g2d.translate(-self.scene.cameraX, -self.scene.cameraY)
 			g2d.setColor(0, 0, 0, 0.6)
 			g2d.rectangle('fill', 0, 0, GAME:getGameDimensions())
-			g2d.setColor(1, 1, 1, 1)
+			g2d.setColor(1, 1, 1, pro)
 			local sw, sh = GAME:getGameDimensions()
 			if m.sprite then
 				local iw, ih = m.sprite:getDimensions()
@@ -191,10 +208,12 @@ function Player:draw(g2d)
 				g2d.draw(m.sprite, x, y, nil, 36 / iw, 36 / ih)
 			end
 				local dw, dh = self.dialogueBoxSprite:getDimensions()
-				local dx = (sw - dw) / 2
-				local dy = sh - dh
-				g2d.draw(self.dialogueBoxSprite, dx, dy) 
-				g2d.printf(m.dialogue, dx + 7, dy + 2, dw - 11)
+				local x = (sw - dw) / 2
+				local y = sh - dh
+				g2d.setColor(1, 1, 1, 1)
+				local finalY = uMath.map(pro, 0, 1, sh, y)
+				g2d.draw(self.dialogueBoxSprite, x, finalY) 
+				g2d.printf(m.dialogue, x + 7, finalY + 2, dw - 11)
 		g2d.pop()
 	end
 end
@@ -216,9 +235,9 @@ end
 
 function Player:_onInteractInput()
 	if self.itemMenu.visible then
-		self.itemMenu.visible = false
-		self.itemMenu.sprite = nil
-		self.itemMenu.dialogue = ""
+		if self.itemMenu.progress == self.itemMenu.maxProgress or DEBUG.DEV_MODE then
+			self:_hideItemMenu()
+		end
 		return
 	end
 
@@ -258,11 +277,20 @@ end
 
 --============================ Internals ==============================
 
+function Player:_hideItemMenu()
+	local m = self.itemMenu
+	m.visible = false
+	m.sprite = nil
+	m.dialogue = ""
+end
+
+
 function Player:_showItemMenu(item)
 	local m = self.itemMenu
 	m.visible = true
 	m.dialogue = ""
 	m.sprite = nil
+	m.progress = 0
 	
 	--Searched & collected container    -    SHORT CIRCUIT
 	if item.layer == 'searchables' and item.collected then
@@ -321,7 +349,7 @@ function Player:_collisionFilter(item, other)
 
 	if other.layer == "walls" then
 		return 'slide'
-	elseif other.layer == "doors" and not other.opened then
+	elseif other.layer == "doors" and not other.opened and not DEBUG.NOCLIP_DOORS then
 		return 'slide'
 	elseif other.layer == "pickables" then
 		return 'cross'
