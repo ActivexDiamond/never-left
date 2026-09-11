@@ -81,7 +81,7 @@ function Inventory:update(dt)
 	for k, v in ipairs(self.slots) do
 		if not v.selected then
 			if mx and my and pointInRect(mx, my, v) then
-				v.color = self.highlightedSlotColor
+				v.color = self.highlihtedSlotColor
 				self.highlightedSlot = v
 			else
 				v.color = self.slotColor
@@ -97,6 +97,7 @@ function Inventory:draw(g2d)
 		g2d.translate(-self.parent.scene.cameraX, -self.parent.scene.cameraY)
 		g2d.setLineWidth(1)
 		
+	--g2d.rectangle('fill', self.x, self.y, 50, 50)
 		local sz = self.slotVisualSize - 1
 		for k, v in ipairs(self.slots) do
 			g2d.setColor(v.color)

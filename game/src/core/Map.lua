@@ -6,6 +6,7 @@ local bump = require "cat-paw.core.physics.bump"
 
 local DataRegistry = require "core.DataRegistry"
 local AssetRegistry = require "core.AssetRegistry"
+local Bookshelf = require "entities.Bookshelf"
 
 --============================ Helper Methods ==============================
 
@@ -27,6 +28,7 @@ function Map:initialize(scene)
 		self.objs[layer.name] = {}
 		print("Processing layer: ", layer.name)
 		for _, tiledObj in pairs(layer.objects or {}) do
+			---@class TiledObject
 			local obj = {
 				x = tiledObj.x, y = tiledObj.y, 
 				phyW = tiledObj.width + 0.0001, phyH = tiledObj.height + 0.0001,
@@ -64,10 +66,12 @@ function Map:initialize(scene)
 				obj.collected = false
 			elseif layer.name == "pickables" then
 				obj.sprite = true
-			elseif layer.name == "pz_candles" then
-			elseif layer.name == "pz_push" then
-			elseif layer.name == "pz_symbol_sorter" then
-			elseif layer.name == "pz_ritual" then
+			elseif layer.name == "puzzles" then
+				if obj.ID == "symbol_sorter_bookshelf" then
+					local bookshelf = Bookshelf(scene, obj)
+					self.scene.bookshelf = bookshelf
+					self.scene:addObject(bookshelf)
+				end
 			end
 
 			assert(obj.ID and #obj.ID > 0, "Object with no ID from layer: " .. tostring(layer.name))

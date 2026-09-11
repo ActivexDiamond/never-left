@@ -55,7 +55,7 @@ function Player:initialize(scene, x, y)
 	self.scene.map.bumpWorld:add(self.interactBox, self.interactBox:getBoundingBox())
 
 	self.inv = Inventory("player_inventory", self)
-	
+
 	self.itemMenu = {
 		visible = false, 
 		progress = 0,
@@ -95,7 +95,7 @@ function Player:update(dt)
 	if isDown('s') then dirY = dirY + 1 end
 	if isDown('a') then dirX = dirX - 1 end
 	if isDown('d') then dirX = dirX + 1 end
-	if not self.itemMenu.visible and (dirX ~= 0 or dirY ~= 0) then
+	if not self.frozen and (dirX ~= 0 or dirY ~= 0) then
 		self.vel.x = dirX
 		self.vel.y = dirY
 		self.vel.length = self.SPEED * dt
@@ -244,7 +244,16 @@ function Player:_onInteractInput()
 	if not self.nearbyInteractable then return end
 
 	local obj = self.nearbyInteractable
-	if obj.layer == "doors" then
+	print("Interacting with: ", obj.ID)
+
+	if obj.layer == "puzzles" then
+		if obj.ID == "symbol_sorter_bookshelf" then
+			--FIXME: The physics stuff should keep track of classes. Which may be TiledObjects or children of them,
+			--    Or something similar. Not whatever this is.
+			self.scene.bookshelf:toggleShown()
+			self.frozen = self.scene.bookshelf:isShown()
+		end
+	elseif obj.layer == "doors" then
 		--HASAN: Change the the volume and pitch to whatever sounds good.
 		PLAY_SOUND(AUDIO.SFX.opendoor, 1, 8)
 		self:_showItemMenu(obj)
@@ -282,6 +291,7 @@ function Player:_hideItemMenu()
 	m.visible = false
 	m.sprite = nil
 	m.dialogue = ""
+	self.frozen = false
 end
 
 
@@ -291,7 +301,8 @@ function Player:_showItemMenu(item)
 	m.dialogue = ""
 	m.sprite = nil
 	m.progress = 0
-	
+	self.frozen = true
+
 	--Searched & collected container    -    SHORT CIRCUIT
 	if item.layer == 'searchables' and item.collected then
 --		m.dialogue = "> I picked up everything useful here."

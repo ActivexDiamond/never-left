@@ -35,5 +35,14 @@ data{"player_inventory",
 	slotColor = {0.3, 0.3, 0.3, 1},
 	selectedSlotColor = {0.3, 0, 0, 1},
 	highlightedSlotColor = {0.6, 0.6, 0.6, 1},
-
 }
+
+data{"bookshelf",
+	slotCount = 9,
+	slotVisualSize = 9,
+	slotVisualPadding = 2,
+	slotColor = {0.3, 0.3, 0.3, 1},
+	selectedSlotColor = {0.3, 0, 0, 1},
+	highlightedSlotColor = {0.6, 0.6, 0.6, 1},
+}
+

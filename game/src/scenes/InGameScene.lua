@@ -58,6 +58,7 @@ function InGameScene:update(dt)
 end
 
 function InGameScene:draw(g2d)
+	--FULLY OVERRIDES Scene.draw
 	g2d.push('all')
 		self.font = love.graphics.newFont("assets/fonts/smallest_pixel-7.ttf", 10)
 		self.font:setFilter('nearest', 'nearest', 0)
@@ -73,6 +74,7 @@ function InGameScene:draw(g2d)
 		self.player:earlyDraw(g2d)
 		self.map:draw(g2d)
 		self.player:draw(g2d)
+		self.bookshelf:draw(g2d)
 	g2d.pop()
 		g2d.setColor(1,0,0)
 		g2d.setPointSize(8)
