@@ -14,7 +14,12 @@ DEBUG = {
 	NOCLIP_DOORS = true,
 }
 
-TMP = {}
+TMP = {
+			opendoor = love.audio.newSource("assets/sfx/opendoor.mp3", "static"),
+			plant = love.audio.newSource("assets/sfx/plant.mp3", "static"),
+			drawer = love.audio.newSource("assets/sfx/drawer.mp3", "static"),
+
+}
  
 AUDIO = {
 	SEARCH_SOUNDS = {
@@ -73,6 +78,7 @@ AUDIO = {
 
 		crowbar_pickup = love.audio.newSource("assets/sfx/crowbar_pickup.mp3", "static"),
 	},
+
 }
 
 ---Play a sound, optionally with some variance. Pauses previous instances, if any.
