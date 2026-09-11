@@ -1,5 +1,5 @@
 data{"matches",
-	dialogue = [[> Matches. Great. Now all I need is something worth lighting .
+	dialogue = [[> Matches, great. Now all I need is something worth lighting.
 ]],
 }
 
@@ -14,10 +14,9 @@ data{"polaroid",
 }
 
 data{"studyroomdrawr",
-	dialogue = [[> Oh there is nothing in this drawr let me search somewhere else.
+	dialogue = [[> Hmm... there is nothing in this drawer, let me search somewhere else.
 ]],
 }
-
 
 data{"bathtub",  -- dw this won't show :3
 	dialogue = [[> Def not taking a shower in here, when was the last time anyone cleaned this thing. 
@@ -25,7 +24,7 @@ data{"bathtub",  -- dw this won't show :3
 }
 
 data{"razor",
-	dialogue = [[> a razor this must be useful . 
+	dialogue = [[> A razor this must be useful... 
 ]],
 }
 
@@ -37,49 +36,53 @@ data{"plant",
 }
 
 data{"sofa",
-	dialogue = [[> Ancient, Greasy as hell too. You'd think I'd at least find a coin in here. let me search somewhere else.
+	dialogue = [[> Ancient, greasy as hell, too. You'd think I'd at least find a coin in here. Let me search somewhere else.
 ]],
 }
 
 
 data{"nightstand",
-	dialogue = [[> Someone left this drawer half open... nothing ,let me search somewhere else.
+	dialogue = [[> Someone left this drawer half open... 
+
+> Nothing, let me search somewhere else.
 ]],
 }
 
 
 data{"closet",
-	dialogue = [[> oh the stank is unbearable but there is nothing of use let me search somewhere else.
+	dialogue = [[> The stink is unbearable...
+> There is nothing of use here, let me search elsewhere.
 ]],
 }
 
 data{"studyroomcabnet",
-	dialogue = [[> most of them are half opened someone must've been here not long ago .
+	dialogue = [[> Most of them are half open.
+> Someone must've been here not long ago.
 ]],
 }
 
 data{"printer",
-	dialogue = [[> Oh a printer it hasn't been used in a while let me search somewhere else.
+	dialogue = [[> Oh, a printer. It hasn't been used in a while. Let me search somewhere else.
 ]],
 }
 
 data{"ropes",
-	dialogue = [[> a hand full of used ropes this can't be useful , let me search somewhere else .
+	dialogue = [[> A handful of used ropes... These can't be useful, let me search somewhere else.
 ]],
 }
 
 data{"book",
-	dialogue = [[> A book  .
+	dialogue = [[> A book.
 ]],
 }
 
 data{"toilet",
-	dialogue = [[> SEARCH.
+	dialogue = [[> A toilet seat. I'd rather not look in there...
 ]],
 }
 
 data{"bed",
-	dialogue = [[> Nothing here , the bed is empty surprisingly the only clean thing in here.
+	dialogue = [[> Nothing here, the bed is empty. Surprisingly the only clean thing in here.
 ]],
 }
 -- this won't show 

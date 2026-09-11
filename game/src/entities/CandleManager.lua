@@ -8,13 +8,13 @@ local AssetRegistry = require "core.AssetRegistry"
 
 --============================ Constructor ==============================
 
----@class Bookshelf : Inventory
+---@class CandleManager : Inventory
 ---@overload fun(scene: Scene, obj: TiledObject): self
-local Bookshelf = middleclass("Bookshelf", Inventory)
+local CandleManager = middleclass("CandleManager", Inventory)
 
-function Bookshelf:initialize(scene, obj)
+function CandleManager:initialize(scene, obj)
 	local sw, sh = GAME:getGameDimensions()
-	Inventory.initialize(self, "bookshelf_inventory", self, sw / 2, sh / 2)
+	Inventory.initialize(self, "candle_manager_inventory", self, sw / 2, sh / 2)
 
 	self.x = self.x - self.background.w / 2
 	self.y = self.y + self.background.h
@@ -25,17 +25,38 @@ function Bookshelf:initialize(scene, obj)
 	self.tiledObject = obj
 
 	self.shown = false
+
+	self.candles = {}
+	self.litCandles = {}
+
+	for i = 1, 4 do
+		local candle = {ID = "candle_" .. tostring(i), 
+			w = 16, 
+			h = 16
+		}
+		local litCandle = {ID = "candle_" .. tostring(i) .. "_lit",
+			w = 8, 
+			h = 8,
+		}
+		candle.sprite, candle.sx, candle.sy = AssetRegistry:getSprObj(candle)
+		litCandle.sprite, litCandle.sx, litCandle.sy = AssetRegistry:getSprObj(litCandle)
+
+		self.candles[i] = candle
+		self.litCandles[i] = litCandle
+
+		self:addItem(candle)
+	end
 end
 
 --============================ Core API ==============================
 
-function Bookshelf:update(dt)
+function CandleManager:update(dt)
 	if self.shown then
 		Inventory.update(self, dt)
 	end
 end
 
-function Bookshelf:draw(g2d)
+function CandleManager:draw(g2d)
 	if self.shown then
 		Inventory.draw(self, g2d)
 	end
@@ -45,8 +66,8 @@ end
 
 --============================ Internals ==============================
 
-function Bookshelf:_attemptCombine()
-	PLAY_SOUND(AUDIO.SFX.paperrustle)
+function CandleManager:_attemptCombine()
+	PLAY_SOUND(AUDIO.SFX.match_use)
 	local i1 = TMP.mouseSlot.item
 	local i2 = TMP.highlightedSlot.item
 	TMP.mouseSlot.item = i2
@@ -54,7 +75,7 @@ function Bookshelf:_attemptCombine()
 	
 end
 
-function Bookshelf:_checkSolution()
+function CandleManager:_checkSolution()
 	--Only run the check if all slots are full.
 	local itemCount = 0
 	for k, v in ipairs(self.slots) do 
@@ -62,17 +83,15 @@ function Bookshelf:_checkSolution()
 	end
 	if not DEBUG.DEV_MODE and itemCount < #self.slots then return false end
 
-	if DEBUG.DEV_MODE or (self.slots[1].item.ID == "symbol_1" and
-			self.slots[2].item.ID == "symbol_2" and
-			self.slots[3].item.ID == "symbol_3") then
-		PLAY_SOUND(AUDIO.SFX.crowbar_pickup)
-		local crowbar = {ID = "crowbar"}
-		DataRegistry:applyStats(crowbar)
-		crowbar.sprite, crowbar.sx, crowbar.sy = AssetRegistry:getSprObj(crowbar)
+--	if DEBUG.DEV_MODE or (self.slots[1].item.ID == "candle_1_lit" and
+	if (self.slots[1].item.ID == "candle_1_lit" and
+			self.slots[2].item.ID == "candle_2_lit" and
+			self.slots[3].item.ID == "candle_3" and
+			self.slots[4].item.ID == "candle_4_lit") then
+		
+		PLAY_SOUND(AUDIO.SFX.wood_break)
 
-		self.scene.player:_showItemMenu(crowbar)
-		self.scene.player.inv:addItem(crowbar)
-
+		self.scene.player.inv:removeItemById("matches")
 		self.scene.map.bumpWorld:remove(self.tiledObject)
 		self.scene:removeObject(self)
 		return true
@@ -82,13 +101,13 @@ end
 
 --============================ Getters / Setters ==============================
 
-function Bookshelf:isShown() return self.shown end
+function CandleManager:isShown() return self.shown end
 
-function Bookshelf:toggleShown()
+function CandleManager:toggleShown()
 	self.shown = not self.shown
 	if not self.shown then
 		self:_checkSolution()
 	end
 end
 
-return Bookshelf
+return CandleManager

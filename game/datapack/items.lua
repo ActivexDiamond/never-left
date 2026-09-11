@@ -35,7 +35,9 @@ data{"chalk",
 data{"crowbar",
 	w = 8,
 	h = 8,
-	dialogue=[[> An old rusty crowbar.
+	dialogue=[[> The bookshelf moves...
+
+> Revealing an old rusty crowbar.
 ]],
 }
 
@@ -85,7 +87,7 @@ data{"polaroid",
 }
 
 data{"dg_missing_page",
-	pickUpItem = "book",
+	--pickUpItem = "book",
 	w = 8,
 	h = 8,
 	dialogue = [[> A book with a ripped out page.

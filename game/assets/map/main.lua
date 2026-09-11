@@ -10,7 +10,7 @@ return {
   tilewidth = 400,
   tileheight = 260,
   nextlayerid = 12,
-  nextobjectid = 197,
+  nextobjectid = 198,
   properties = {},
   tilesets = {
     {
@@ -1435,7 +1435,7 @@ return {
       id = 3,
       name = "searchables",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -1489,22 +1489,6 @@ return {
           visible = true,
           properties = {
             ["typ"] = "eggs"
-          }
-        },
-        {
-          id = 140,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 183.813,
-          y = 46.625,
-          width = 17.9375,
-          height = 16.5,
-          rotation = 0,
-          opacity = 1,
-          visible = true,
-          properties = {
-            ["typ"] = "studyroomdrawr"
           }
         },
         {
@@ -1847,7 +1831,7 @@ return {
       id = 10,
       name = "pickables",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -1873,18 +1857,18 @@ return {
         },
         {
           id = 192,
-          name = "missing_page",
+          name = "study_key",
           type = "",
           shape = "rectangle",
-          x = 147.727,
-          y = 198.091,
+          x = 93.727,
+          y = 72.091,
           width = 7.09091,
           height = 7.36364,
           rotation = 0,
           opacity = 1,
           visible = true,
           properties = {
-            ["typ"] = "missingpage"
+            ["typ"] = "bathroomkey"
           }
         },
         {
@@ -1900,6 +1884,22 @@ return {
           opacity = 1,
           visible = true,
           properties = {}
+        },
+        {
+          id = 197,
+          name = "missing_page",
+          type = "",
+          shape = "rectangle",
+          x = 147.08,
+          y = 197.193,
+          width = 7.09091,
+          height = 7.36364,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["typ"] = "missingpage"
+          }
         }
       }
     },
@@ -1909,7 +1909,7 @@ return {
       id = 11,
       name = "puzzles",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -1964,6 +1964,22 @@ return {
           properties = {
             ["typ"] = "bookshelf"
           }
+        },
+        {
+          id = 140,
+          name = "candle_desk",
+          type = "",
+          shape = "rectangle",
+          x = 183.813,
+          y = 46.625,
+          width = 17.9375,
+          height = 16.5,
+          rotation = 0,
+          opacity = 1,
+          visible = true,
+          properties = {
+            ["typ"] = "studyroomdrawr"
+          }
         }
       }
     },
@@ -1973,7 +1989,7 @@ return {
       id = 4,
       name = "doors",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -2099,7 +2115,7 @@ return {
       id = 5,
       name = "dialogues",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,

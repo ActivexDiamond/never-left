@@ -77,6 +77,7 @@ function InGameScene:draw(g2d)
 		self.map:draw(g2d)
 		self.player:draw(g2d)
 		self.bookshelf:draw(g2d)
+		self.candleManager:draw(g2d)
 	g2d.pop()
 		g2d.setColor(1,0,0)
 		g2d.setPointSize(8)
@@ -90,6 +91,7 @@ end
 InGameScene[EvMousePresss] = function(self, e)
 	local mx, my = push:toGame(e.x ,e.y)
 
+	--FIXME: Manual overrides for `candle_desk`.
 	--Not holding item and clicked on a slot.
 	if not TMP.mouseItem and TMP.highlightedSlot then
 		--Only select it and pick up, if it is non-empty.

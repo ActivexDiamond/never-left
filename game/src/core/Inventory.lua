@@ -143,6 +143,10 @@ end
 
 function Inventory:_attemptCombine()
 	print("Combined: ", TMP.mouseItem.ID, TMP.highlightedSlot.item.ID)
+	
+	GAME:getCurrentState().player:_showItemMenu({
+		dialogue = "> These two don't go together..."
+	}, true)
 end
 
 
@@ -153,14 +157,19 @@ function Inventory:_attemptUse(obj)
 		if obj.keyItem == TMP.mouseItem.ID then
 			PLAY_SOUND(AUDIO.SFX.crowbar_use)
 			obj.opened = true
-			self.parent.scene.map.bumpWorld:remove(obj)
+--			self.parent.scene.map.bumpWorld:remove(obj)
 			
 			TMP.mouseSlot.item = nil
 			TMP.mouseSlot.selected = false
 			TMP.mouseSlot = nil
 			TMP.mouseItem = nil
+			return
 		end
 	end
+
+	GAME:getCurrentState().player:_showItemMenu({
+		dialogue = "> I can't use this here..."
+	}, true)
 end
 
 --============================ Callbacks ==============================
@@ -194,6 +203,17 @@ function Inventory:addItem(item)
 	end
 	return false
 end
+
+function Inventory:removeItemById(id)
+	for k, v in ipairs(self.slots) do
+		if v.item and v.item.ID == id then
+			v.item = nil
+			return true
+		end
+	end
+	return false
+end
+
 
 --============================ Getters / Setters ==============================
 

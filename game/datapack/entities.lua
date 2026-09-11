@@ -52,3 +52,15 @@ data{"bookshelf_inventory",
 	outlineColor = {0.3, 0.3, 0.3, 1},
 }
 
+data{"candle_manager_inventory",
+	slotCols = 4,
+	slotRows = 1,
+	slotVisualSize = 18,
+	slotVisualPadding = 10,
+	slotColor = {0.1, 0.1, 0.1, 1},
+	selectedSlotColor = {0.1, 0, 0, 1},
+	highlightedSlotColor = {0.1, 0.1, 0.1, 1},
+	backgroundColor = {0.1, 0.1, 0.1, 1},
+	outlineColor = {0.3, 0.3, 0.3, 1},
+}
+

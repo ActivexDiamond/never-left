@@ -1,17 +1,15 @@
 DEBUG = {
-	SKIP_LOGOS = true,
-
 	DEV_MODE = true,
+	NOCLIP_DOORS = true,
 
 	SHOW_LOVE_VERSION = false,
 	SHOW_FPS = false,
 
 	DISABLE_SHADERS = true,
-	MUTE_AUDIO = true,
+	MUTE_AUDIO = false,
 
 	DRAW_BOUNDING_BOXES = false,
 	DRAW_INTERACT_BOX = false,
-	NOCLIP_DOORS = true,
 }
 
 TMP = {}
@@ -73,6 +71,9 @@ AUDIO = {
 
 		crowbar_pickup = love.audio.newSource("assets/sfx/crowbar_pickup.mp3", "static"),
 		crowbar_use = love.audio.newSource("assets/sfx/crowbar_use.mp3", "static"),
+		
+		match_use = love.audio.newSource("assets/sfx/match_use.mp3", "static"),
+		wood_break = love.audio.newSource("assets/sfx/wood_break.mp3", "static"),
 	},
 }
 
@@ -117,7 +118,6 @@ end
 
 local os = love.system.getOS()
 if os == "Web" or os == "Android" then
-	DEBUG.SKIP_LOGOS = false
 	DEBUG.DEV_MODE = false
 	DEBUG.MUTE_AUDIO = false
 	DEBUG.INITIAL_SCENE = nil
@@ -129,7 +129,6 @@ if os == "Android" then
 end
 
 if love.filesystem.isFused() then
-	DEBUG.SKIP_LOGOS = false
 	DEBUG.DEV_MODE = false
 	DEBUG.MUTE_AUDIO = false
 	DEBUG.SHOW_FPS = false

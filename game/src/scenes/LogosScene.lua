@@ -43,7 +43,7 @@ end
 --============================ Core API ==============================
 function LogosScene:update(dt)
 	Scene.update(self, dt)
-	if DEBUG.SKIP_LOGOS then GAME:goTo(GAME.ESceneIds.IN_GAME) end
+	if DEBUG.DEV_MODE then GAME:goTo(GAME.ESceneIds.IN_GAME) end
 	if love.timer.getTime() - self.lastTransitionTime > self.currentLogo.DURATION then
 		self:_nextLogo()
 	end
@@ -88,7 +88,7 @@ function LogosScene:_nextLogo()
 	
 	if not self.currentLogo then
 		self.currentLogoIndex = 0
-		GAME:goTo(GAME.ESceneIds.IN_GAME)
+		GAME:goTo(GAME.ESceneIds.MENU)
 	end
 end
 

@@ -9,6 +9,7 @@ local AbstractGame = require "cat-paw.engine.AbstractGame"
 local LogosScene = require "scenes.LogosScene"
 local InGameScene = require "scenes.InGameScene"
 local GameOverScene = require "scenes.GameOverScene"
+local MenuScene = require "src.scenes.MenuScene"
 
 local EventSystem = require "cat-paw.core.patterns.event.EventSystem"
 local EvWindowResize = require "cat-paw.core.patterns.event.os.EvWindowResize"
@@ -55,7 +56,7 @@ function Game:initialize(...)
 	self:add(Game.ESceneIds.LOGOS, LogosScene())
 	self:add(Game.ESceneIds.IN_GAME, InGameScene())
 	self:add(Game.ESceneIds.GAME_OVER, GameOverScene())
---	self:add(Game.ESceneIds.MENU, MenuScene())
+	self:add(Game.ESceneIds.MENU, MenuScene())
 	
 	if DEBUG and DEBUG.INITIAL_SCENE then
 		self:goTo(DEBUG.INITIAL_SCENE)

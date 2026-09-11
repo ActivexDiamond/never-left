@@ -74,7 +74,7 @@ function Player:initialize(scene, x, y)
 	self:setSpriteOffset(WorldObject.SPRITE_CENTER)
 	self.scene.map.bumpWorld:add(self, self:getBoundingBox())
 
-	self.rotation = math.pi / 2
+	self.rotation = - math.pi / 2
 	self.scratchRotationVector = brinevector(0, 0)
 	self.walkStepCooldown = 0
 
@@ -118,8 +118,8 @@ function Player:update(dt)
 		--HASAN: I think this plays way too often.
 		self.walkStepCooldown = self.walkStepCooldown - dt
 		if self.walkStepCooldown <= 0 then
-			PLAY_SOUND(AUDIO.SFX.walkingg, 0.35, 8, 0.7)
-			self.walkStepCooldown = 0.28
+			PLAY_SOUND(AUDIO.SFX.walkingg, 0.15, 20, 1)
+			self.walkStepCooldown = 0.35
 		end
 	else
 		self.walkStepCooldown = 0
@@ -143,7 +143,10 @@ function Player:update(dt)
 	self.inv:update(dt)
 	
 	local m = self.itemMenu
-	m.progress = m.progress + dt
+	local rate = m.quick and 3 or 1
+	if DEBUG.DEV_MODE then rate = 8 end
+	m.progress = m.progress + dt * rate
+
 	if m.progress > m.maxProgress then
 		m.progress = m.maxProgress
 	end
@@ -250,12 +253,21 @@ function Player:_onInteractInput()
 			--    Or something similar. Not whatever this is.
 			self.scene.bookshelf:toggleShown()
 			self.frozen = self.scene.bookshelf:isShown()
+	elseif obj.ID == "candle_desk" then
+			--FIXME: The physics stuff should keep track of classes. Which may be TiledObjects or children of them,
+			--    Or something similar. Not whatever this is.
+			self.scene.candleManager:toggleShown()
+			self.frozen = self.scene.candleManager:isShown()
 		end
 	elseif obj.layer == "doors" then
 		--HASAN: Change the the volume and pitch to whatever sounds good.
 		PLAY_SOUND(AUDIO.SFX.opendoor, 1, 8)
 		self:_showItemMenu(obj)
+		if obj.ID == 'outside' then
+			self.scene.map.objs.doors.initial.opened = true
+		end
 	elseif obj.layer == "pickables" then
+		self:_showItemMenu(obj)
 		--HASAN: Change the the volume and pitch to whatever sounds good.
 		PLAY_SOUND(AUDIO.SFX.pickup, 1, 8)
 		print("Picked up", obj)
@@ -264,6 +276,7 @@ function Player:_onInteractInput()
 		self.scene.map.bumpWorld:remove(obj)
 		self.scene.map.objs.pickables[obj.ID] = nil	
 	elseif obj.layer == 'dialogues' then
+		self:_showItemMenu(obj)
 	elseif obj.layer == 'searchables' then
 		--Show in all cases, as it handles searched containers and empty ones.
 		self:_showItemMenu(obj)
@@ -289,16 +302,18 @@ function Player:_hideItemMenu()
 	m.visible = false
 	m.sprite = nil
 	m.dialogue = ""
+	m.quick = false
 	self.frozen = false
 end
 
 
-function Player:_showItemMenu(item)
+function Player:_showItemMenu(item, quick)
 	local m = self.itemMenu
 	m.visible = true
 	m.dialogue = ""
 	m.sprite = nil
 	m.progress = 0
+	m.quick = quick
 	self.frozen = true
 
 	--Searched & collected container    -    SHORT CIRCUIT

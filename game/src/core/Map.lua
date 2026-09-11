@@ -7,6 +7,7 @@ local bump = require "cat-paw.core.physics.bump"
 local DataRegistry = require "core.DataRegistry"
 local AssetRegistry = require "core.AssetRegistry"
 local Bookshelf = require "entities.Bookshelf"
+local CandleManager = require "entities.CandleManager"
 
 --============================ Helper Methods ==============================
 
@@ -71,6 +72,10 @@ function Map:initialize(scene)
 					local bookshelf = Bookshelf(scene, obj)
 					self.scene.bookshelf = bookshelf
 					self.scene:addObject(bookshelf)
+				elseif obj.ID == "candle_desk" then
+					local candleManager = CandleManager(scene, obj)
+					self.scene.candleManager = candleManager
+					self.scene:addObject(candleManager)
 				end
 			end
 
@@ -125,6 +130,7 @@ end
 --============================ API ==============================
 
 --============================ Internals ==============================
+
 Map[EvKeyPress] = function(self, e)
 	if e.key == 'space' then
 --		PLAY_SOUND(AUDIO.SFX.clockticking, nil, nil, 0.1)
@@ -135,7 +141,7 @@ end
 
 function Map:getSpawnPoint()
 	--FIXME: Hardcoded. Should be defined in Tiled.
-	return 312, 131
+	return 300, 140
 end
 
 function Map:getCenterPoint()
