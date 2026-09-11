@@ -10,27 +10,36 @@ local Inventory = require "core.Inventory"
 local Bookshelf = middleclass("Bookshelf", Inventory)
 
 function Bookshelf:initialize(scene, obj)
-	Inventory.initialize(self, "bookshelf", self)
+	local sw, sh = GAME:getGameDimensions()
+	Inventory.initialize(self, "bookshelf_inventory", self, sw / 2, sh / 2)
+
+	self.x = self.x - self.background.w / 2
+	self.y = self.y + self.background.h
+	self:setPosition()
+	self.drawBackground = true
+
 	self.scene = scene
 	self.tiledObject = obj
-	
-	local sw, sh = GAME:getGameDimensions()
-	self.x = sw / 2
-	self.y = sh / 2
+
 	self.shown = false
 end
 
 --============================ Core API ==============================
 
 function Bookshelf:update(dt)
-	Inventory.update(self, dt)
+	if self.shown then
+		Inventory.update(self, dt)
+	end
 end
 
 function Bookshelf:draw(g2d)
-	Inventory.draw(self, g2d)
+	if self.shown then
+		Inventory.draw(self, g2d)
+	end
 end
 
 --============================ API ==============================
+
 
 --============================ Internals ==============================
 

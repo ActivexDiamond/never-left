@@ -54,7 +54,7 @@ function Player:initialize(scene, x, y)
 	self.interactBox = WorldObject("player_interact_box", scene, x, y)
 	self.scene.map.bumpWorld:add(self.interactBox, self.interactBox:getBoundingBox())
 
-	self.inv = Inventory("player_inventory", self)
+	self.inv = Inventory("player_inventory", self, 'top_right')
 
 	self.itemMenu = {
 		visible = false, 
@@ -98,7 +98,11 @@ function Player:update(dt)
 	if not self.frozen and (dirX ~= 0 or dirY ~= 0) then
 		self.vel.x = dirX
 		self.vel.y = dirY
-		self.vel.length = self.SPEED * dt
+		if DEBUG.DEV_MODE then
+			self.vel.length = self.SPEED * 3 * dt
+		else
+			self.vel.length = self.SPEED * dt
+		end 
 		
 		local targetX = self.pos.x + self.vel.x
 		local targetY = self.pos.y + self.vel.y

@@ -213,7 +213,7 @@
     <property name="typ" value="studyroomcabnet"/>
    </properties>
   </object>
-  <object id="168" name="symbol_2" x="209.364" y="103" width="5" height="2.90909"/>
+  <object id="168" name="symbol_2" x="210.739" y="108.375" width="6.125" height="4.78409"/>
   <object id="172" x="120.75" y="198.75" width="10.75" height="11.25">
    <properties>
     <property name="typ" value="book"/>

@@ -14,6 +14,7 @@ DEBUG = {
 	NOCLIP_DOORS = true,
 }
 
+TMP = {}
  
 AUDIO = {
 	SEARCH_SOUNDS = {
