@@ -1,3 +1,8 @@
+data{"finale",
+	dialogue = [[> These are the same monsters that I saw in the book. I need to go back to safety...
+]]
+}
+
 data{"initial",
 	dialogue = [[> I want to leave...
 ]]

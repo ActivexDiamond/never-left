@@ -235,9 +235,13 @@ Player[EvFileChange] = function(self, e)
 end
 
 function Player:_onInteractInput()
+
 	if self.itemMenu.visible then
 		if self.itemMenu.progress == self.itemMenu.maxProgress or DEBUG.DEV_MODE then
 			self:_hideItemMenu()
+			if GAME_DONE then
+				GAME:goTo(GAME.ESceneIds.GAME_OVER)
+			end
 		end
 		return
 	end
@@ -263,6 +267,10 @@ function Player:_onInteractInput()
 		--HASAN: Change the the volume and pitch to whatever sounds good.
 		PLAY_SOUND(AUDIO.SFX.opendoor, 1, 8)
 		self:_showItemMenu(obj)
+		if obj.ID == "finale" then
+			GAME_DONE = true
+		end
+
 		if obj.ID == 'outside' then
 			self.scene.map.objs.doors.initial.opened = true
 		end

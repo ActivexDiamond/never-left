@@ -100,13 +100,15 @@ function Map:update(dt)
 	if CHALK_DONE then
 		self.ID = "map_chalked"
 	end
+	if CHALK_DONE and BLOOD_DONE then
+		self.ID = "map_chalked_and_blooded"
+	end
 end
 
 function Map:draw(g2d)
 --	WorldObject.draw(self, g2d)
 	self.w = 400 self.h = 260
 	local spr, sx, sy = AssetRegistry:getSprObj(self)
-	for k, v in pairs(self) do print(k, v) end
 
 	local b = 1
 	g2d.setColor(b, b, b, 1)

@@ -1,9 +1,13 @@
 local middleclass = require "libs.middleclass"
 local Object = require "core.Object"
 
+local DataRegistry = require "core.DataRegistry"
+local AssetRegistry = require "core.AssetRegistry"
 local EvMousePress = require "cat-paw.core.patterns.event.mouse.EvMousePress"
 
 local push = require "libs.push"
+local shack = require "libs.shack"
+
 
 --============================ Helper Methods ==============================
 
@@ -166,8 +170,48 @@ end
 
 
 function Inventory:_attemptUse(obj)
+	if GAME:getCurrentState().player.itemMenu.visible then
+		return
+	end
 	print("Used on: ", obj.ID)
 
+	if obj.ID == "player" then
+		if TMP.mouseItem and TMP.mouseItem.ID ~= "razor" then
+			GAME:getCurrentState().player:_showItemMenu({
+				dialogue = "> I can't use this on myself!"
+			})
+			return
+		elseif TMP.mouseItem and TMP.mouseItem.ID == "razor" then
+			--if not DEBUG.DEV_MODE and not CHALK_DONE then 
+			if not CHALK_DONE then 
+					GAME:getCurrentState().player:_showItemMenu({
+					dialogue = [[> I can't use this quite yet...
+
+> The ritual isn't ready yet.
+]]
+				})			
+				return 
+			end
+			BLOOD_DONE = true
+	
+			shack:setShake(20)
+			TMP.mouseSlot.item = nil
+			TMP.mouseSlot = nil
+			TMP.mouseItem = nil
+
+			local bookData = {ID = "evil_dead_book", w = 8, h = 8}
+			DataRegistry:applyStats(bookData)
+			local sprite, sx, sy = AssetRegistry:getSprObj(bookData)
+			GAME:getCurrentState().player:_showItemMenu({
+					sprite = sprite,
+					dialogue = [[> My work here is done, I did everything the book asked me to.,
+I can leave now...
+]]
+			})
+			GAME:getCurrentState().map.objs.doors.outside.opened = true
+			return
+		end
+	end
 	if obj.layer and obj.layer == "doors" then
 		if obj.keyItem == TMP.mouseItem.ID then
 			PLAY_SOUND(AUDIO.SFX.crowbar_use)
@@ -199,7 +243,7 @@ function Inventory.mouseInteractFilter(item)
 
 	if item.ID then
 		if item.ID == "player_interact_box" or
-				item.ID == "player" then
+				item.ID == "ritual_carpet" then
 			return false
 		end
 	end

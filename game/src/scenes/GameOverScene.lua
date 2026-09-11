@@ -14,7 +14,7 @@ local GameOverScene = middleclass("GameOverScene", Scene)
 	
 function GameOverScene:initialize()
 	Scene.initialize(self)
-	self.sprite = love.graphics.newImage("assets/spr/obj/gameover.png")
+	self.sprite = love.graphics.newImage("assets/spr/gui/gameover.png")
 end
 
 --============================ Core API ==============================
@@ -27,7 +27,7 @@ function GameOverScene:draw(g2d)
 	local iw, ih = self.sprite:getDimensions()
 	local x = (160 - iw) / 2
 	local y = (90 - ih) / 2
-	g2d.draw(self.sprite, x, y)
+	g2d.draw(self.sprite, 0, 0, nil, 1/10, 1/10)
 end
 
 --============================ API ==============================

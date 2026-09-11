@@ -75,7 +75,7 @@ Game.WINDOW_TARGET_CONFIGS = {
 	INITIAL_H = 360 * 2,
 	
 	RESIZABLE = true,
-	FULLSCREEN = false,
+	FULLSCREEN = true,
 	
 	CANVAS = false,
 	HIGH_DPI = false,

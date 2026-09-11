@@ -1,6 +1,6 @@
 DEBUG = {
-	DEV_MODE = true,
-	NOCLIP_DOORS = true,
+	DEV_MODE = false,
+	NOCLIP_DOORS = false,
 
 	SHOW_LOVE_VERSION = false,
 	SHOW_FPS = false,
