@@ -37,10 +37,7 @@ AUDIO = {
 		
 		raining = love.audio.newSource("assets/sfx/raining.mp3", "stream"),
  
-	 
-
 		walkingg = love.audio.newSource("assets/sfx/walk.mp3", "static"),
-  
 
 		rainingthunder = love.audio.newSource("assets/sfx/rainingthunder.mp3", "static"),
 
@@ -79,7 +76,13 @@ AUDIO = {
 ---@param pitch number? The pitch variance, if any. between 1 and 100. [default=nil]
 ---@param chance number? The chance of actually playing the audio. 1 is guranteed. Between 0 and 1. [default=1]
 function PLAY_SOUND(src, volume, pitch, chance)
-	if not src then return end
+	if not src then 
+		local t = debug.getinfo(2)
+		for k, v in pairs(t) do print(k, v) end
+		local str = "[WARNING] [GLOBALS.PLAY_SOUND] Audio source was nil! \n\tCalled from: %s:%d: in function '%s'"
+		print(str:format(t.short_src, t.currentline, t.name or ""))
+		return false
+	end
 
 	volume = volume or 1
 	chance = chance or 1
@@ -98,15 +101,12 @@ function PLAY_SOUND(src, volume, pitch, chance)
 		end
 	end
 
-	if chance < 1 then
-		if love.math.random() < chance then
-			src:stop()
-			src:play()
-		end
-	else
-		src:stop()
-		src:play()
+	if chance < 1 and love.math.random() > chance then
+		return false
 	end
+	src:stop()
+	src:play()
+	return true
 end
 
 local os = love.system.getOS()
