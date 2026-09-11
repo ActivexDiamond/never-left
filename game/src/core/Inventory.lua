@@ -197,6 +197,7 @@ function Inventory:setPosition(x, y)
 					SELECTED = self.selectedSlotColor,
 					HIGHLIGHTED = self.highlightedSlotColor,
 				},
+				inventory = self,
 				selected = false,
 				item = nil,
 			})

@@ -19,6 +19,7 @@ TMP = {}
 AUDIO = {
 	SEARCH_SOUNDS = {
 		--HASAN: Fill this
+--		basementdoor = love.audio.newSource("assets/sfx/basementdoor.mp3", "static"),
 	},
 
 	SFX = {
@@ -67,9 +68,10 @@ AUDIO = {
 		staticnoise = love.audio.newSource("assets/sfx/staticnoise.mp3", "static"),
 
 		swoshhorror = love.audio.newSource("assets/sfx/swoshhorror.mp3", "static"),
-		
+
 		paperrustle = love.audio.newSource("assets/sfx/paperrustle.mp3", "static"),
 
+		crowbar_pickup = love.audio.newSource("assets/sfx/crowbar_pickup.mp3", "static"),
 	},
 }
 

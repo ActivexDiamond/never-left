@@ -1,6 +1,9 @@
 local middleclass = require "libs.middleclass"
 local Inventory = require "core.Inventory"
 
+local DataRegistry = require "core.DataRegistry"
+local AssetRegistry = require "core.AssetRegistry"
+
 --============================ Helper Methods ==============================
 
 --============================ Constructor ==============================
@@ -43,12 +46,29 @@ end
 --============================ Internals ==============================
 
 function Bookshelf:_attemptCombine()
-	PLAY_SOUND(dw
+	PLAY_SOUND(AUDIO.SFX.paperrustle)
 	local i1 = TMP.mouseSlot.item
 	local i2 = TMP.highlightedSlot.item
 	TMP.mouseSlot.item = i2
 	TMP.highlightedSlot.item = i1
 	
+end
+
+function Bookshelf:_checkSolution()
+	if self.slots[1].item.ID == "symbol_1" and
+			self.slots[2].item.ID == "symbol_2" and
+			self.slots[3].item.ID == "symbol_3" then
+		PLAY_SOUND(AUDIO.SFX.crowbar_pickup)
+		local crowbar = {ID = "crowbar"}
+		DataRegistry:applyStats(crowbar)
+		crowbar.sprite, crowbar.sx, crowbar.sy = AssetRegistry:getSprObj(crowbar)
+
+		self.scene.player.inv:addItem(crowbar)
+
+
+
+		self.scene:removeObject(self)
+	end
 end
 
 
@@ -58,7 +78,9 @@ function Bookshelf:isShown() return self.shown end
 
 function Bookshelf:toggleShown()
 	self.shown = not self.shown
-	print(self.shown)
+	if not self.shown then
+		self:_checkSolution()
+	end
 end
 
 return Bookshelf

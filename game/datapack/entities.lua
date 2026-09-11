@@ -30,7 +30,7 @@ data{"player_sparkle",
 }
 data{"player_inventory",
 	slotCols = 3,
-	slotRows = 4,
+	slotRows = 3,
 	slotVisualSize = 9,	
 	slotVisualPadding = 2,
 	slotColor = {0.3, 0.3, 0.3, 1},

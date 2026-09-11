@@ -116,7 +116,7 @@ InGameScene[EvMousePresss] = function(self, e)
 	
 	--Holding an item and clicked on a slot with an item.
 	if TMP.mouseItem and TMP.highlightedSlot and TMP.highlightedSlot.item then
-		self.player.inv:_attemptCombine()
+		TMP.highlightedSlot.inventory:_attemptCombine()
 		TMP.mouseSlot.selected = false
 		TMP.mouseSlot.color = TMP.mouseSlot.colors.DEFAULT
 		TMP.mouseItem = nil
